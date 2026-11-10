@@ -1,0 +1,680 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Nesrin Mahmoud Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=El+Messiri:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap">
+<style>
+/* LAYOUT: editorial gallery. Giant serif name over an arched portrait, then one chapter per project
+   (index list -> chapter header -> data blocks -> screens strip). Own palette, deliberately apart from the
+   wine / rose / chocolate worlds of the three case studies: lichen + moss ink, periwinkle and butter.
+   Colour ratio 60 / 30 / 10 = ground / surfaces / accents. */
+:root{
+  --bg:#E7EADA; --bg2:#D9DEC6; --surf:#F3F5E8; --ink:#161B12; --mut:#4F5843; --line:rgba(22,27,18,.16);
+  --acc:#3A45A6; --acc-ink:#F3F5E8; --butter:#EBD35C; --butter-ink:#161B12; --moss:#6E7A4A;
+  --shadow:0 30px 70px -30px rgba(22,27,18,.35);
+  --fd:'Instrument Serif','El Messiri',Georgia,serif; --fb:'Hanken Grotesk','IBM Plex Sans Arabic',system-ui,sans-serif; --fm:'DM Mono','IBM Plex Sans Arabic',ui-monospace,monospace;
+  --gut:max(16px,env(safe-area-inset-left,0px)); --gutr:max(16px,env(safe-area-inset-right,0px));
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E120C;--bg2:#161C12;--surf:#1B2316;--ink:#ECEADB;--mut:#A5AC96;--line:rgba(236,234,219,.16);--acc:#9AA6F0;--acc-ink:#0E120C;--butter:#E6D177;--moss:#8E9B63;--shadow:0 30px 70px -30px rgba(0,0,0,.7);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0E120C;--bg2:#161C12;--surf:#1B2316;--ink:#ECEADB;--mut:#A5AC96;--line:rgba(236,234,219,.16);--acc:#9AA6F0;--acc-ink:#0E120C;--butter:#E6D177;--moss:#8E9B63;--shadow:0 30px 70px -30px rgba(0,0,0,.7);color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 var(--fb);overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .5s,color .5s}
+[dir=rtl] body{line-height:1.85}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:pointer}
+h1,h2,h3,h4,p{margin:0}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1320px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gutr)}
+.mono{font-family:var(--fm);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+[dir=rtl] .mono{letter-spacing:0;font-size:13px}
+.serif{font-family:var(--fd);font-weight:400}
+[dir=rtl] .serif,[dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3{font-family:'El Messiri',var(--fd);font-weight:500}
+.mut{color:var(--mut)}
+/* progress + cursor + grain */
+#prog{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--acc);z-index:90}
+[dir=rtl] #prog{transform-origin:100% 50%}
+#cur{position:fixed;left:0;top:0;width:14px;height:14px;border-radius:50%;background:var(--butter);mix-blend-mode:difference;pointer-events:none;z-index:95;transform:translate(-50%,-50%);transition:width .25s,height .25s;display:none}
+#cur.big{width:64px;height:64px}
+@media(hover:hover) and (pointer:fine){#cur{display:block}}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:80;opacity:.07;mix-blend-mode:multiply;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
+:root[data-theme="dark"] .grain{mix-blend-mode:screen;opacity:.05}
+/* preloader */
+#pre{position:fixed;inset:0;z-index:200;background:var(--ink);color:var(--bg);display:flex;align-items:flex-end;justify-content:space-between;padding:max(24px,env(safe-area-inset-top,0px)) var(--gutr) 28px var(--gut);transition:transform .9s cubic-bezier(.77,0,.18,1)}
+#pre.out{transform:translateY(-101%)}
+#pre b{font:400 clamp(64px,16vw,220px)/.8 var(--fd)}
+#pre span{font:500 12px var(--fm);letter-spacing:.14em}
+/* nav */
+nav.top{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:70;display:flex;align-items:center;gap:14px;padding:14px var(--gutr) 14px var(--gut);transition:background .4s,backdrop-filter .4s}
+nav.top.solid{background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:71;background:var(--bg)}
+.logo{font:400 26px/1 var(--fd);display:flex;gap:8px;align-items:center}
+.logo i{width:30px;height:30px;border-radius:50%;background:var(--butter);color:var(--butter-ink);display:grid;place-items:center;font:italic 400 16px var(--fd);font-style:italic}
+.links{display:flex;gap:26px;margin-inline-start:auto}
+.links a{font:500 13px var(--fm);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);position:relative;padding:4px 0;transition:color .3s}
+[dir=rtl] .links a{letter-spacing:0;font-size:14px;font-family:var(--fb)}
+.links a:hover{color:var(--ink)}
+.links a::after{content:"";position:absolute;inset:auto 0 0;height:1px;background:var(--acc);transform:scaleX(0);transition:transform .35s}
+.links a:hover::after{transform:scaleX(1)}
+.tools{display:flex;gap:8px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:99px;min-height:40px;padding:0 16px;font:500 13px var(--fm);letter-spacing:.06em;display:inline-flex;align-items:center;gap:8px;transition:.3s}
+.pill:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.pill svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6}
+@media(max-width:860px){.links{display:none}nav.top{justify-content:space-between}}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:12px;min-height:54px;padding:0 28px;border-radius:99px;background:var(--acc);color:var(--acc-ink);font:600 15px var(--fb);border:1px solid var(--acc);transition:transform .3s,background .3s,color .3s;position:relative}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn .ar{transition:transform .3s}.btn:hover .ar{transform:translateX(5px)}[dir=rtl] .btn .ar{transform:scaleX(-1)}[dir=rtl] .btn:hover .ar{transform:scaleX(-1) translateX(5px)}
+/* hero */
+.hero{padding-top:calc(110px + env(safe-area-inset-top,0px));position:relative;overflow:hidden}
+.hero .g{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(20px,4vw,60px);align-items:end}
+.hero .eb{display:flex;gap:14px;align-items:center;margin-bottom:26px}
+.hero .eb::before{content:"";width:46px;height:1px;background:var(--ink)}
+.name{font:400 clamp(70px,14.2vw,232px)/.84 var(--fd);letter-spacing:-.035em}
+[dir=rtl] .name{font-family:'El Messiri',var(--fd);font-weight:600;font-size:clamp(58px,11vw,170px);line-height:1.02;letter-spacing:0}
+.name .ln{display:block;overflow:hidden;padding-bottom:.08em}
+.name .ln>span{display:block;transform:translateY(105%);animation:up 1.2s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--d,0s)}
+.name .ln:nth-child(2){font-style:italic;color:var(--acc)}
+[dir=rtl] .name .ln:nth-child(2){font-style:normal}
+body.ready .name .ln>span{animation-play-state:running}
+body:not(.ready) .name .ln>span{animation-play-state:paused}
+@keyframes up{to{transform:none}}
+.hero .lead{max-width:34ch;font-size:clamp(19px,2vw,24px);line-height:1.5;margin-top:34px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.port{position:relative;max-width:460px;margin-inline-start:auto;width:100%}
+.port .arch{aspect-ratio:4/5.3;border-radius:999px 999px 14px 14px;overflow:hidden;background:var(--bg2);box-shadow:var(--shadow)}
+.port img{width:100%;height:112%;object-fit:cover;object-position:50% 20%}
+.badge{position:absolute;inset-inline-start:-26px;bottom:7%;width:128px;height:128px;border-radius:50%;background:var(--butter);color:var(--butter-ink);display:grid;place-items:center;text-align:center;font:italic 400 21px/1.05 var(--fd);transform:rotate(-12deg);box-shadow:var(--shadow)}
+[dir=rtl] .badge{font-style:normal;font-family:'El Messiri';font-size:17px}
+.badge svg{position:absolute;inset:0;animation:spin 22s linear infinite}.badge svg text{font:500 9.4px var(--fm);letter-spacing:.2em;fill:currentColor;text-transform:uppercase}
+@keyframes spin{to{transform:rotate(360deg)}}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);margin-top:clamp(40px,6vw,80px);border-top:1px solid var(--ink)}
+.facts div{padding:18px 0 26px;border-inline-end:1px solid var(--line);padding-inline-start:18px}
+.facts div:first-child{padding-inline-start:0}.facts div:last-child{border:0}
+.facts b{display:block;font:400 clamp(40px,5vw,70px)/1 var(--fd);font-variant-numeric:tabular-nums}
+[dir=rtl] .facts b{font-family:'El Messiri';font-weight:500}
+@media(max-width:860px){.hero .g{grid-template-columns:1fr}.port{max-width:360px;margin:20px auto 0}.facts{grid-template-columns:1fr 1fr}.facts div:nth-child(2){border:0}.facts div:nth-child(3){padding-inline-start:0}}
+/* marquee */
+.mq{overflow:hidden;background:var(--ink);color:var(--bg);padding:18px 0;margin-top:clamp(50px,7vw,90px);direction:ltr}
+.mq .tr{display:flex;width:max-content;gap:0;will-change:transform;animation:mq 38s linear infinite}
+.mq span{font:italic 400 clamp(30px,4vw,54px)/1 var(--fd);padding:0 28px;white-space:nowrap}
+[dir=rtl] .mq span{font-style:normal;font-family:'El Messiri'}
+.mq i{color:var(--butter);font-style:normal}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* sections */
+section{padding:clamp(80px,11vw,150px) 0;position:relative}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap;margin-bottom:clamp(36px,5vw,70px)}
+.sh h2{font:400 clamp(46px,8vw,128px)/.92 var(--fd);letter-spacing:-.025em;max-width:16ch;text-wrap:balance}
+[dir=rtl] .sh h2{letter-spacing:0;line-height:1.12;font-size:clamp(40px,6.4vw,100px)}
+.sh h2 em{color:var(--acc);font-style:italic}[dir=rtl] .sh h2 em{font-style:normal}
+.sh p{max-width:38ch;color:var(--mut)}
+/* index */
+.idx{border-top:1px solid var(--ink)}
+.row{display:grid;grid-template-columns:70px 1.4fr 1fr auto;gap:24px;align-items:center;padding:26px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:padding .4s,background .4s;position:relative}
+.row:hover{padding-inline:18px;background:var(--surf)}
+.row .n{font:500 13px var(--fm);color:var(--mut)}
+.row h3{font:400 clamp(34px,5.6vw,84px)/1 var(--fd);letter-spacing:-.02em}
+[dir=rtl] .row h3{letter-spacing:0;font-size:clamp(30px,4.8vw,68px)}
+.row .k{color:var(--mut);font-size:15px}
+.row .go{width:54px;height:54px;border-radius:50%;border:1px solid var(--ink);display:grid;place-items:center;transition:.35s}
+.row:hover .go{background:var(--butter);border-color:var(--butter);color:var(--butter-ink);transform:rotate(-45deg)}
+[dir=rtl] .row:hover .go{transform:rotate(45deg) scaleX(-1)}
+#pv{position:fixed;left:0;top:0;width:min(320px,26vw);aspect-ratio:4/5;border-radius:14px;overflow:hidden;pointer-events:none;z-index:60;opacity:0;transform:translate(-50%,-50%) scale(.85);transition:opacity .25s,transform .25s;box-shadow:var(--shadow)}
+#pv.on{opacity:1;transform:translate(-50%,-50%) scale(1)}#pv img{width:100%;height:100%;object-fit:cover}
+@media(max-width:760px){.row{grid-template-columns:36px 1fr 44px}.row .k{display:none}.row .go{width:44px;height:44px}}
+@media(hover:none){#pv{display:none}}
+/* chapter */
+.ch{--pc:var(--acc);border-top:1px solid var(--ink)}
+.ch-head{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,4vw,70px);align-items:end}
+.ch-num{font:400 clamp(90px,17vw,260px)/.78 var(--fd);color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+[dir=rtl] .ch-num{font-family:'Instrument Serif'}
+.ch-title{font:400 clamp(52px,9.5vw,150px)/.88 var(--fd);letter-spacing:-.03em}
+[dir=rtl] .ch-title{font-size:clamp(44px,7.5vw,112px);letter-spacing:0;line-height:1.1}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{border:1px solid var(--line);border-radius:99px;padding:5px 15px;font:500 12px var(--fm);letter-spacing:.06em;background:var(--surf)}
+.chip.dot::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--pc);margin-inline-end:8px}
+@media(max-width:760px){.ch-head{grid-template-columns:1fr}.ch-num{font-size:110px}}
+.hero-img{margin-top:clamp(30px,4vw,56px);border-radius:18px;overflow:hidden;aspect-ratio:21/9;background:var(--bg2);position:relative;box-shadow:var(--shadow)}
+.hero-img img{width:100%;height:120%;object-fit:cover}
+@media(max-width:760px){.hero-img{aspect-ratio:4/3}}
+.meta{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:clamp(18px,3vw,50px);margin-top:clamp(34px,5vw,64px)}
+.meta .lede{font:400 clamp(24px,2.6vw,36px)/1.25 var(--fd);text-wrap:pretty}
+[dir=rtl] .meta .lede{font-family:'El Messiri';font-size:clamp(20px,2.2vw,28px);line-height:1.6}
+.meta dt{margin-bottom:8px;color:var(--mut)}.meta dd{margin:0;font-size:16px;line-height:1.5}
+@media(max-width:900px){.meta{grid-template-columns:1fr 1fr}.meta>div:first-child{grid-column:1/-1}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:clamp(40px,6vw,80px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats div{padding:26px 20px 28px 0;border-inline-end:1px solid var(--line)}.stats div+div{padding-inline-start:22px}.stats div:last-child{border:0}
+.stats b{display:block;font:400 clamp(52px,7vw,104px)/.95 var(--fd);color:var(--pc);font-variant-numeric:tabular-nums}
+.blk>h3 em,.stats b{color:color-mix(in srgb,var(--pc) 70%,var(--ink))}.stats.s5{grid-template-columns:repeat(5,1fr)}
+@media(max-width:760px){.stats,.blk>h3 em,.stats b{color:color-mix(in srgb,var(--pc) 70%,var(--ink))}.stats.s5{grid-template-columns:1fr 1fr}.stats div{border-bottom:1px solid var(--line);padding-inline-start:0!important}}
+.blk{margin-top:clamp(60px,8vw,120px)}
+.blk>h3{font:400 clamp(34px,4.6vw,66px)/1 var(--fd);letter-spacing:-.02em;margin-bottom:12px;max-width:20ch;text-wrap:balance}
+[dir=rtl] .blk>h3{letter-spacing:0;line-height:1.25;font-size:clamp(30px,3.8vw,52px)}
+.blk>h3 em{color:var(--pc);font-style:italic}[dir=rtl] .blk>h3 em{font-style:normal}
+.blk>.sub{max-width:56ch;color:var(--mut);margin-bottom:34px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,40px)}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:18px;padding:clamp(22px,3vw,38px)}
+.card h4{font:400 clamp(26px,2.6vw,36px)/1.1 var(--fd);margin-bottom:12px}[dir=rtl] .card h4{font-family:'El Messiri';font-weight:600}
+.card p{color:var(--mut)}
+.list{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.list li{padding:15px 0;border-top:1px solid var(--line);display:flex;gap:16px}
+.list li:last-child{border-bottom:1px solid var(--line)}
+.list li::before{content:"×";color:var(--pc);font:400 20px/1.3 var(--fd);flex:none}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}@media(max-width:900px){.g5{grid-template-columns:1fr 1fr}}
+.pers .who button:focus-visible{outline:2px solid var(--acc)}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.grid4>*,.g5>*,.sp>*,.two>*{min-width:0}.mod b,.card h4{overflow-wrap:anywhere}@media(max-width:520px){.grid4{grid-template-columns:1fr}}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){.grid4{grid-template-columns:1fr 1fr}.grid3{grid-template-columns:1fr}}
+.mod{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:22px;min-height:150px;display:flex;flex-direction:column;justify-content:space-between;gap:20px;transition:transform .4s,background .4s,color .4s}
+.mod:hover{transform:translateY(-6px);background:var(--ink);color:var(--bg)}.mod:hover .mut{color:inherit;opacity:.75}
+.mod b{font:400 24px/1.1 var(--fd)}[dir=rtl] .mod b{font-family:'El Messiri';font-weight:600;font-size:20px}
+/* arch diagram */
+.arch-d{display:grid;gap:14px;justify-items:center}
+.arch-d .r{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%}
+.arch-d .n{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center}
+.arch-d .n b{display:block;font:400 24px/1.1 var(--fd)}[dir=rtl] .arch-d .n b{font-family:'El Messiri';font-size:20px}
+.arch-d .c{background:var(--pc);color:var(--acc-ink);border-radius:99px;padding:20px 46px;font:400 clamp(24px,3vw,38px) var(--fd);text-align:center}
+[dir=rtl] .arch-d .c{font-family:'El Messiri'}
+.arch-d .bar{width:100%;border:1px dashed var(--ink);border-radius:99px;padding:12px;text-align:center}
+@media(max-width:600px){.arch-d .r{grid-template-columns:1fr}.arch-d .c{padding:18px 24px}}
+/* control bars */
+.ctl{display:grid;gap:14px}
+.ctl .it{display:grid;grid-template-columns:260px 1fr;gap:26px;align-items:center;padding:26px;background:var(--surf);border:1px solid var(--line);border-radius:18px}
+.ctl h4{font:400 32px/1 var(--fd)}[dir=rtl] .ctl h4{font-family:'El Messiri'}
+.ctl q{display:block;color:var(--mut);margin-top:6px;quotes:none}
+.meter{display:grid;gap:8px}.meter .t{height:12px;border-radius:99px;background:var(--bg2);position:relative;overflow:hidden}
+.meter .t i{position:absolute;inset:0 auto 0 0;width:100%;border-radius:99px;transform-origin:0 50%;transform:scaleX(var(--v));transition:transform 1.4s cubic-bezier(.2,.8,.2,1)}
+[dir=rtl] .meter .t i{inset:0 0 0 auto;width:100%;transform-origin:100% 50%}
+.meter .u i{background:var(--ink)}.meter .a i{background:var(--pc)}
+.meter .l{display:flex;justify-content:space-between;font:500 12px var(--fm);color:var(--mut)}
+@media(max-width:760px){.ctl .it{grid-template-columns:1fr}}
+/* journey */
+.jr{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,60px);align-items:center}
+.jr .st{display:grid;gap:0}
+.jr button{all:unset;cursor:pointer;display:grid;grid-template-columns:44px 1fr;gap:12px;padding:16px 0;border-top:1px solid var(--line);transition:padding .3s;box-sizing:border-box}
+.jr button:last-child{border-bottom:1px solid var(--line)}
+.jr button .no{font:500 12px var(--fm);color:var(--mut);padding-top:5px}
+.jr button b{font:400 28px/1.1 var(--fd)}[dir=rtl] .jr button b{font-family:'El Messiri';font-size:22px;font-weight:600}
+.jr button p{display:none;color:var(--mut);margin-top:8px;grid-column:2}
+.jr button[aria-pressed=true]{padding:22px 0}.jr button[aria-pressed=true] p{display:block}.jr button[aria-pressed=true] .no{color:var(--pc)}
+.jr button:focus-visible{outline:2px solid var(--acc)}
+.phone{width:min(300px,70vw);margin:0 auto;border:8px solid var(--ink);border-radius:40px;overflow:hidden;background:var(--ink);aspect-ratio:9/19;box-shadow:var(--shadow)}
+.phone img{width:100%;height:100%;object-fit:cover;object-position:top}
+@media(max-width:760px){.jr{grid-template-columns:1fr}.jr .ph{order:-1}}
+/* tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.tab{border:1px solid var(--line);background:transparent;border-radius:99px;min-height:42px;padding:0 18px;font:500 13px var(--fm);transition:.3s}
+.tab:hover{border-color:var(--ink)}.tab[aria-selected=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.pane-d{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(20px,4vw,60px);align-items:start}
+.pane-d h4{font:400 clamp(34px,4vw,56px)/1 var(--fd);margin-bottom:14px}[dir=rtl] .pane-d h4{font-family:'El Messiri';font-size:clamp(30px,3.4vw,44px);font-weight:600;line-height:1.2}
+.pane-d ol{margin:22px 0 0;padding:0;list-style:none;counter-reset:s;display:grid}
+.pane-d ol li{counter-increment:s;display:grid;grid-template-columns:38px 1fr;padding:12px 0;border-top:1px solid var(--line)}
+.pane-d ol li::before{content:counter(s,decimal-leading-zero);font:500 12px var(--fm);color:var(--pc);padding-top:5px}
+.pane-d ol li span{display:block;color:var(--mut);font-size:15px}
+@media(max-width:860px){.pane-d{grid-template-columns:1fr}}
+/* screens strip */
+.strip{display:flex;gap:16px;overflow-x:auto;padding:6px 0 22px;scroll-snap-type:x proximity;cursor:grab;scrollbar-width:thin;scrollbar-color:var(--ink) transparent;direction:ltr}
+.strip.drag{cursor:grabbing;scroll-snap-type:none}
+.strip figure{margin:0;flex:none;scroll-snap-align:start}
+.strip figure img{height:min(560px,70vh);width:auto;border-radius:22px;border:1px solid var(--line);box-shadow:var(--shadow);user-select:none;-webkit-user-drag:none;background:var(--bg2)}
+.strip.wide figure img{height:min(420px,55vh);border-radius:12px}
+.strip figcaption{font:500 11px var(--fm);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-top:10px}
+[dir=rtl] .strip figcaption{letter-spacing:0;font-size:13px;direction:rtl}
+/* compare */
+.cmp{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:1100/482;background:var(--bg2);user-select:none;touch-action:pan-y;direction:ltr;box-shadow:var(--shadow)}
+.cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.cmp .top{clip-path:inset(0 0 0 var(--p,50%))}
+.cmp .hd{position:absolute;top:0;bottom:0;left:var(--p,50%);width:2px;background:var(--butter);transform:translateX(-1px)}
+.cmp .hd::after{content:"⇄";position:absolute;top:50%;left:50%;width:46px;height:46px;border-radius:50%;background:var(--butter);color:var(--butter-ink);transform:translate(-50%,-50%);display:grid;place-items:center;font-size:18px}
+.cmp input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.cmp .tg{position:absolute;bottom:12px;padding:5px 12px;border-radius:99px;background:var(--ink);color:var(--bg);font:500 11px var(--fm);letter-spacing:.1em}
+.cmp .tg.l{left:12px}.cmp .tg.r{right:12px}
+@media(max-width:600px){.cmp{aspect-ratio:4/3}}
+/* personas */
+.pers{display:grid;grid-template-columns:260px 1fr;gap:clamp(20px,3vw,40px);align-items:start}
+.pers .who{display:grid;gap:8px}
+.pers .who button{all:unset;cursor:pointer;display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:14px;transition:.3s;box-sizing:border-box}
+.pers .who button img{width:52px;height:52px;border-radius:50%;object-fit:cover}
+.pers .who button b{display:block;font:500 16px var(--fb);line-height:1.2}.pers .who button span{font-size:13px;color:var(--mut)}
+.pers .who button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}.pers .who button[aria-pressed=true] span{color:inherit;opacity:.75}
+.pers .det{display:grid;gap:18px}
+.pers .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pers .tri div{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:20px}
+.pers .tri .mono{color:var(--pc);display:block;margin-bottom:10px}
+.pers .sheet{border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+@media(max-width:900px){.pers{grid-template-columns:1fr}.pers .who{grid-template-columns:repeat(2,1fr)}.pers .tri{grid-template-columns:1fr}}
+/* accordion */
+.acc{border-top:1px solid var(--ink)}
+.acc details{border-bottom:1px solid var(--line)}
+.acc summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:22px 0;font:400 clamp(24px,3vw,40px)/1.15 var(--fd)}
+[dir=rtl] .acc summary{font-family:'El Messiri';font-size:clamp(20px,2.4vw,30px);font-weight:500}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"+";font:300 34px/1 var(--fb);transition:transform .3s;color:var(--pc)}
+.acc details[open] summary::after{transform:rotate(45deg)}
+.acc ul{margin:0 0 26px;padding:0;list-style:none;display:grid;gap:8px;max-width:70ch}
+.acc li{color:var(--mut);padding-inline-start:22px;position:relative}.acc li::before{content:"→";position:absolute;inset-inline-start:0;color:var(--pc)}
+[dir=rtl] .acc li::before{content:"←"}
+/* spaces */
+.sp{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.sp .c{background:var(--surf);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .4s}
+.sp .c:hover{transform:translateY(-6px)}
+.sp .c img{aspect-ratio:3/2;object-fit:cover;width:100%;background:#e8edf5}
+.sp .c div{padding:18px;display:grid;gap:8px;flex:1;align-content:start}
+.sp b{font:400 26px/1.1 var(--fd)}[dir=rtl] .sp b{font-family:'El Messiri';font-size:21px;font-weight:600}
+.sp .pr{font:500 13px var(--fm);color:var(--pc);margin-top:auto;padding-top:8px}
+.dots{display:flex;gap:4px}.dots i{width:18px;height:5px;border-radius:9px;background:var(--line)}.dots i.on{background:var(--pc)}
+@media(max-width:900px){.sp{grid-template-columns:1fr 1fr}}@media(max-width:520px){.sp{grid-template-columns:1fr}}
+/* swatches */
+.sw{display:grid;grid-template-columns:repeat(6,1fr);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+.sw div{min-height:190px;padding:14px;display:flex;flex-direction:column;justify-content:flex-end;font:500 11px var(--fm);letter-spacing:.08em;transition:flex .4s}
+.sw b{font:400 22px var(--fd);letter-spacing:0;display:block;margin-bottom:4px}
+@media(max-width:700px){.sw{grid-template-columns:repeat(3,1fr)}.sw div{min-height:120px}}
+/* table lab */
+.lab{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(18px,3vw,40px);align-items:stretch}
+.lab .stage{background:var(--surf);border:1px solid var(--line);border-radius:18px;display:grid;place-items:center;padding:20px;min-height:340px;position:relative;overflow:hidden}
+.lab .stage svg{width:100%;max-width:560px;height:auto}
+.lab .stage .rd{position:absolute;top:16px;inset-inline-start:18px;color:var(--mut)}
+.lab .ctrl{display:grid;gap:20px;align-content:start}
+.lab label{display:grid;gap:8px}.lab label span{display:flex;justify-content:space-between}
+.lab input[type=range]{width:100%;accent-color:var(--acc);height:28px}
+.lab .pre{display:flex;flex-wrap:wrap;gap:8px}
+@media(max-width:860px){.lab{grid-template-columns:1fr}}
+/* two-col stories */
+.stories{display:flex;gap:14px;overflow-x:auto;padding-bottom:18px;direction:ltr;scrollbar-width:thin}
+.stories figure{margin:0;flex:none;width:min(420px,78vw)}
+.stories img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:14px;border:1px solid var(--line)}
+.stories figcaption{padding-top:12px;display:grid;gap:2px;direction:inherit}
+.stories figcaption b{font:400 22px/1.15 var(--fd)}[dir=rtl] .stories figcaption b{font-family:'El Messiri';font-size:18px}
+.stories figcaption span{color:var(--pc);font:500 12px var(--fm)}
+[dir=rtl] .stories figcaption{direction:rtl;text-align:right}
+/* more work */
+.more{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.more .card{min-height:260px;display:flex;flex-direction:column;justify-content:space-between;transition:background .4s,color .4s}
+.more .card:hover{background:var(--butter);color:var(--butter-ink)}.more .card:hover p,.more .card:hover .mono{color:inherit}
+.more h4{font-size:clamp(34px,3.4vw,50px)!important}
+@media(max-width:860px){.more{grid-template-columns:1fr}}
+/* about */
+.ab{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(26px,5vw,80px);align-items:start}
+.ab .im{border-radius:18px;overflow:hidden;aspect-ratio:4/5;box-shadow:var(--shadow);position:sticky;top:90px}
+.ab .im img{width:100%;height:100%;object-fit:cover}
+.ab p.big{font:400 clamp(26px,3vw,42px)/1.22 var(--fd);text-wrap:pretty}
+[dir=rtl] .ab p.big{font-family:'El Messiri';font-size:clamp(21px,2.3vw,30px);line-height:1.7}
+.ab .grp{margin-top:34px}.ab .grp h4{margin-bottom:12px;color:var(--mut)}
+.edu{margin-top:36px;padding:24px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--line);display:grid;gap:6px}
+.edu b{font:400 30px/1.1 var(--fd)}[dir=rtl] .edu b{font-family:'El Messiri'}
+@media(max-width:860px){.ab{grid-template-columns:1fr}.ab .im{position:relative;top:0;max-width:380px}}
+/* system */
+.sys{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(20px,4vw,60px)}
+.ratio{display:flex;height:150px;border-radius:16px;overflow:hidden;border:1px solid var(--line);direction:ltr}
+.ratio div{display:flex;align-items:flex-end;padding:14px;font:500 12px var(--fm);transition:flex .6s}
+.ratio .a{flex:60;background:var(--bg2);color:var(--ink)}.ratio .b{flex:30;background:var(--moss);color:#fff}.ratio .c{flex:7;background:var(--acc);color:var(--acc-ink)}.ratio .d{flex:3;background:var(--butter);color:var(--butter-ink);padding:6px}
+.ratio:hover .c,.ratio:hover .d{flex:14}
+.spec{display:grid;gap:18px}
+.spec .s{border-top:1px solid var(--line);padding-top:14px}
+.spec .d1{font:400 clamp(44px,6vw,84px)/.95 var(--fd)}.spec .d1 i{color:var(--acc)}
+.spec .d2{font:600 clamp(36px,4.6vw,64px)/1.2 'El Messiri'}
+.spec .d3{font:400 20px var(--fb)}
+@media(max-width:860px){.sys{grid-template-columns:1fr}}
+/* contact */
+.ct{background:var(--ink);color:var(--bg);border-radius:28px 28px 0 0;margin-top:40px}
+.ct h2{font:400 clamp(60px,13vw,220px)/.86 var(--fd);letter-spacing:-.035em}
+[dir=rtl] .ct h2{letter-spacing:0;line-height:1.1;font-size:clamp(48px,10vw,150px);font-family:'El Messiri';font-weight:600}
+.ct h2 em{color:var(--butter);font-style:italic}[dir=rtl] .ct h2 em{font-style:normal}
+.ct .lines{margin-top:50px;display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px}
+.ct .l{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:20px 0;border-top:1px solid color-mix(in srgb,var(--bg) 25%,transparent);font-size:18px;word-break:break-word;transition:padding .3s}
+a.l:hover{padding-inline:12px;color:var(--butter)}
+.ct .l .mono{opacity:.6;flex:none}
+.ct .btn{background:var(--butter);color:var(--butter-ink);border-color:var(--butter)}.ct .btn:hover{background:var(--bg);color:var(--ink);border-color:var(--bg)}
+.ct .cp{background:none;border:1px solid color-mix(in srgb,var(--bg) 40%,transparent);color:inherit;border-radius:99px;padding:4px 12px;font:500 11px var(--fm)}
+.ct .cp:hover{background:var(--butter);color:var(--butter-ink)}
+@media(max-width:760px){.ct .lines{grid-template-columns:1fr}}
+footer{background:var(--ink);color:var(--bg);padding:26px 0 40px;font:500 12px var(--fm);letter-spacing:.08em}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid color-mix(in srgb,var(--bg) 22%,transparent);padding-top:22px}
+/* viewer */
+#vw{position:fixed;inset:0;z-index:150;background:var(--bg);display:none;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+#vw.on{display:flex;animation:vin .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes vin{from{opacity:0;transform:translateY(30px)}}
+.vb{display:flex;gap:10px;align-items:center;padding:10px var(--gutr) 10px var(--gut);border-bottom:1px solid var(--line);background:var(--bg)}
+.vb .t{flex:1;text-align:center;font:400 22px var(--fd);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#vf{flex:1;border:0;width:100%;background:#fff;min-height:0}
+#ld{position:absolute;inset:60px 0 0;display:grid;place-items:center;background:var(--bg);pointer-events:none;transition:opacity .4s;font:italic 400 40px var(--fd)}
+/* reveal */
+.js [data-rv]{will-change:transform,opacity}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}html{scroll-behavior:auto}.name .ln>span{transform:none}.mq .tr{animation:none}#pre{display:none}}
+</style>
+
+<div id="prog"></div><div id="cur"></div><div class="grain"></div>
+<div id="pre" aria-hidden="true"><b id="pn">00</b><span>NESRIN MAHMOUD · PORTFOLIO 2026</span></div>
+<div id="pv"><img alt="" src="assets/v_hero.webp"></div>
+
+<nav class="top" id="nav">
+  <a class="logo" href="#top" aria-label="Nesrin Mahmoud"><i>N</i><span data-en="Nesrin Mahmoud" data-ar="نسرين محمود">Nesrin Mahmoud</span></a>
+  <div class="links">
+    <a href="#work" data-en="Work" data-ar="الأعمال">Work</a>
+    <a href="#about" data-en="About" data-ar="نبذة">About</a>
+    <a href="#system" data-en="System" data-ar="النظام">System</a>
+    <a href="#contact" data-en="Contact" data-ar="تواصل">Contact</a>
+  </div>
+  <div class="tools">
+    <button class="pill" id="th" aria-label="Theme"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg><span id="thl"></span></button>
+    <button class="pill" id="lg" aria-label="Language">العربية</button>
+  </div>
+</nav>
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="g">
+    <div>
+      <div class="eb mono"><span data-en="Industrial Design · UI/UX · Service Design" data-ar="تصميم صناعي · تجربة مستخدم · تصميم خدمات">Industrial Design · UI/UX · Service Design</span></div>
+      <h1 class="name" aria-label="Nesrin Mahmoud"><span class="ln"><span style="--d:.1s" data-en="Nesrin" data-ar="نسرين">Nesrin</span></span><span class="ln"><span style="--d:.25s" data-en="Mahmoud" data-ar="محمود">Mahmoud</span></span></h1>
+      <p class="lead" data-en="I design products, services and screens around how people actually live, from first research to a working prototype." data-ar="أصمّم منتجات وخدمات وواجهات حول طريقة عيش الناس الحقيقية، من أول بحث إلى نموذج يعمل.">I design products, services and screens around how people actually live, from first research to a working prototype.</p>
+      <div class="cta">
+        <a class="btn" href="#work" data-mag><span data-en="See the work" data-ar="شاهد الأعمال">See the work</span><span class="ar">→</span></a>
+        <a class="btn ghost" href="#contact" data-mag><span data-en="Get in touch" data-ar="تواصل معي">Get in touch</span></a>
+      </div>
+    </div>
+    <div class="port">
+      <div class="arch" id="parch"><img src="assets/s_me.webp" alt="Nesrin Mahmoud"></div>
+      <div class="badge"><svg viewBox="0 0 128 128"><defs><path id="cp" d="M64 64m-52 0a52 52 0 1 1 104 0a52 52 0 1 1 -104 0"/></defs><text><textPath href="#cp">Industrial · UX/UI · Service ·</textPath></text></svg><span data-en="Class<br>of 2026" data-ar="دفعة<br>2026">Class<br>of 2026</span></div>
+    </div>
+  </div>
+  <div class="facts">
+    <div><b data-count="4">4</b><span class="mono mut" data-en="Case studies" data-ar="دراسات حالة">Case studies</span></div>
+    <div><b>3.49</b><span class="mono mut" data-en="GPA out of 4.00" data-ar="المعدل من 4.00">GPA out of 4.00</span></div>
+    <div><b>3<sup style="font-size:.4em">rd</sup></b><span class="mono mut" data-en="In graduating class" data-ar="على الدفعة">In graduating class</span></div>
+    <div><b class="serif" style="font-size:clamp(30px,3.6vw,52px);line-height:1.2" data-en="High Distinction" data-ar="امتياز مرتفع">High Distinction</b><span class="mono mut" data-en="Graduation project" data-ar="مشروع التخرج">Graduation project</span></div>
+  </div>
+</div>
+<div class="mq" aria-hidden="true"><div class="tr" id="mq"></div></div>
+</header>
+
+<main>
+<section id="work"><div class="wrap">
+  <div class="sh"><h2 data-en="Selected <em>work</em>" data-ar="أعمال <em>مختارة</em>">Selected <em>work</em></h2><p data-en="Three case studies that cover digital product, service and furniture design. Each one has its own full website, and the research and numbers are shown here too." data-ar="ثلاث دراسات حالة تغطي المنتج الرقمي والخدمة والأثاث. لكل دراسة موقع كامل خاص بها، وتجد الأبحاث والأرقام هنا أيضًا.">…</p></div>
+  <div class="idx" id="idx"></div>
+</div></section>
+
+<div id="chapters"></div>
+
+<section id="more"><div class="wrap">
+  <div class="sh"><h2 data-en="Also <em>built</em>" data-ar="مشاريع <em>أخرى</em>">Also <em>built</em></h2><p data-en="Graduation and concept projects from the Industrial Design degree." data-ar="مشاريع التخرج والمشاريع المفاهيمية من دراسة التصميم الصناعي.">…</p></div>
+  <div class="more" id="moreList"></div>
+</div></section>
+
+<section id="about"><div class="wrap ab">
+  <div class="im" data-rv><img src="assets/s_me.webp" alt="Nesrin Mahmoud" loading="lazy"></div>
+  <div id="aboutBody"></div>
+</div></section>
+
+<section id="system"><div class="wrap">
+  <div class="sh"><h2 data-en="The <em>system</em> behind this page" data-ar="<em>النظام</em> البصري لهذه الصفحة">The <em>system</em> behind this page</h2><p data-en="This portfolio has its own identity, separate from the three case studies. Colours follow a 60 / 30 / 7 / 3 ratio, with light and dark versions of every token." data-ar="لهذا البورتفوليو هوية خاصة مستقلة عن دراسات الحالة الثلاث. الألوان بنسبة 60 / 30 / 7 / 3، ولكل لون نسخة فاتحة وداكنة.">…</p></div>
+  <div class="sys">
+    <div>
+      <div class="ratio" data-rv><div class="a">60 · <span data-en="Lichen ground" data-ar="الأرضية">Ground</span></div><div class="b">30 · <span data-en="Moss" data-ar="الطحلب">Moss</span></div><div class="c">7</div><div class="d">3</div></div>
+      <p class="mut" style="margin-top:16px;max-width:52ch" data-en="Lichen paper and moss ink carry the page. Periwinkle marks interaction and links. Butter is reserved for one moment per screen." data-ar="ورق الأخضر الفاتح وحبر الطحلب يحملان الصفحة. الأزرق البنفسجي للتفاعل والروابط، والأصفر الزبدي للحظة واحدة في كل شاشة.">…</p>
+    </div>
+    <div class="spec" data-rv>
+      <div class="s"><div class="mono mut">Display · Instrument Serif</div><div class="d1">Quiet <i>structure</i></div></div>
+      <div class="s"><div class="mono mut" data-en="Arabic display · El Messiri" data-ar="العربية للعناوين · المسيري">Arabic display · El Messiri</div><div class="d2">تصميم بهدوء وبنية</div></div>
+      <div class="s"><div class="mono mut">Text · Hanken Grotesk / IBM Plex Sans Arabic</div><div class="d3" data-en="Body copy stays at 17px with a 65 character line, so long case studies read easily." data-ar="نص القراءة بحجم 17 بكسل وسطر لا يتجاوز 65 حرفًا لتسهيل قراءة الدراسات الطويلة.">…</div></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="contact" class="ct"><div class="wrap">
+  <div class="mono" style="opacity:.7" data-en="Open to roles and collaborations" data-ar="متاحة للوظائف والتعاون">Open to roles and collaborations</div>
+  <h2 style="margin-top:20px" data-en="Let's design <em>something</em> together." data-ar="لنصمّم <em>شيئًا</em> معًا.">Let's design <em>something</em> together.</h2>
+  <div class="lines" id="clines"></div>
+</div></section>
+</main>
+<footer><div class="wrap"><span>© 2026 NESRIN MAHMOUD</span><span data-en="Industrial & UX Designer · Egypt" data-ar="مصممة صناعية وUX · مصر">Industrial & UX Designer · Egypt</span></div></footer>
+
+<div id="vw" role="dialog" aria-modal="true"><div class="vb"><button class="pill" id="vc">← Portfolio</button><div class="t" id="vt"></div><a class="pill" id="vo" target="_blank" rel="noopener" href="#">↗</a></div><iframe id="vf" title="Case study"></iframe><div id="ld">Loading…</div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+document.documentElement.classList.add('js');
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+let LG='en';const T=a=>a[LG==='ar'?1:0];
+const A=n=>`assets/${n}.webp`;
+const EM='nesreen2397@gmail.com',PH='01015396333',WA='https://wa.me/201556786998',LI='https://www.linkedin.com/in/nesrin-mahmoud123';
+const VIDEO='https://drive.google.com/file/d/1NTMcLw5zigJcA42BN6wrsycKq-hKCfo-/view?usp=sharing',PROTO='https://drive.google.com/file/d/1KfmYo0mI4qKL8f8cJzGxkU-ZE87zawp-/view?usp=sharing';
+
+/* ---------- DATA ---------- */
+const P={
+veyra:{
+ id:'veyra',n:'01',pc:'#C98F80',t:'VEYRA',img:'v_hero',prev:'v_h026',
+ kind:['UI/UX · Smart Home · Team project','تجربة مستخدم · المنزل الذكي · عمل جماعي'],
+ role:['Head of Digital Design','رئيسة التصميم الرقمي'],
+ team:['Arwa Mohamed (CEO & GM)<br>Omnia Ahmed (Visual Development)<br>Yara Akram (Operations)<br>Nesrin Mahmoud (Digital Design)','أروى محمد (الرئيس التنفيذي)<br>أمنية أحمد (التطوير البصري)<br>يارا أكرم (العمليات)<br>نسرين محمود (التصميم الرقمي)'],
+ scope:['Research, flows, 80+ app screens, interactive prototype, feature video','بحث ومسارات و80+ شاشة تطبيق ونموذج تفاعلي وفيديو للمزايا'],
+ lede:['An AI-powered smart wall ecosystem. Veyra turns ordinary walls into interactive interfaces for home automation, security, wellness, entertainment, communication and daily life.','منظومة جدار ذكي بالذكاء الاصطناعي. يحوّل Veyra الجدران العادية إلى واجهات تفاعلية للمنزل الذكي والأمان والصحة والترفيه والتواصل والحياة اليومية.'],
+ tags:['UI/UX Design','Digital Product','Smart Home','Prototype'],
+ stats:[[80,'+',['App screens','شاشة تطبيق']],[8,'',['Core modules','وحدات أساسية']],[6,'',['Worlds in one dashboard','عوالم في لوحة واحدة']],[3,'',['Levels of control','مستويات تحكم']]],
+ links:[['site','Open full case study','افتح الدراسة كاملة'],['video','Watch features video','شاهد فيديو المزايا',VIDEO],['proto','Open prototype','افتح النموذج التفاعلي',PROTO]]
+},
+service:{
+ id:'service',n:'02',pc:'#C9A66B',t:'Workspace<br>Experience',img:'s_after',prev:'s_plan_mod',
+ kind:['Service Design · Coworking · UX Research','تصميم خدمات · مساحات عمل · بحث UX'],
+ role:['Service designer & UX researcher','مصممة خدمات وباحثة UX'],
+ team:['Solo project, with workshops run with 8 participants','مشروع فردي مع ورش عمل شارك فيها 8 أشخاص'],
+ scope:['Personas, journey maps, touchpoint map, workshops, redesigned floor plan, Big Bang booking prototype','شخصيات ورحلات وخريطة نقاط التماس وورش وإعادة تخطيط المساحة ونموذج حجز Big Bang'],
+ lede:['A user-centred redesign of Big Bang Workspace in New Damietta. Six personas and seven participatory workshops showed where members, staff and technicians lose time, then shaped a new plan and a booking website.','إعادة تصميم تتمحور حول المستخدم لمساحة Big Bang Workspace في دمياط الجديدة. ست شخصيات وسبع ورش تشاركية كشفت أين يفقد الأعضاء والموظفون والفنيون وقتهم، ثم أنتجت مخططًا جديدًا وموقع حجز.'],
+ tags:['Personas','Journey Maps','Workshops','Booking Website'],
+ stats:[[6,'',['Personas','شخصيات']],[7,'',['Workshop questions','أسئلة في الورش']],[13,'',['Zones mapped','منطقة مرسومة']],[4,'',['Bookable spaces','مساحات للحجز']]],
+ links:[['site','Open full case study','افتح الدراسة كاملة'],['bigbang','Big Bang prototype','نموذج Big Bang']]
+},
+table:{
+ id:'table',n:'03',pc:'#A9805A',t:'Smart<br>Table',img:'t_11',prev:'t_11',
+ kind:['Product Design · Mobile App UX/UI','تصميم منتج · تطبيق موبايل UX/UI'],
+ role:['UX/UI Designer','مصممة UX/UI'],
+ team:['Solo project','مشروع فردي'],
+ scope:['Mind map, 6 storyboards, feature architecture, app screens, interactive table demo','خريطة ذهنية و6 قصص مصورة وهيكل المزايا وشاشات التطبيق ونموذج تفاعلي للطاولة'],
+ lede:['A companion app for a table that changes height, size and light, so one table can be a desk, a drawing board and a dining table.','تطبيق لطاولة تغيّر ارتفاعها ومقاسها وإضاءتها، لتصبح مكتبًا ولوحة رسم وطاولة طعام.'],
+ tags:['Product','Ergonomics','App UI','Storyboards'],
+ stats:[[6,'',['Storyboards','قصص مصورة']],[6,'',['Features','مزايا']],[3,'',['Adaptive sliders','منزلقات تكيّف']],[6,'',['Colours in the palette','ألوان في الباليت']]],
+ links:[['site','Open full case study','افتح الدراسة كاملة']]
+}};
+const SITE_TITLES={veyra:'VEYRA · Smart Wall',service:'Workspace Experience',table:'Smart Table',bigbang:'Big Bang Workspace'};
+
+/* Veyra */
+const V={
+ problem:[['Multiple disconnected apps and systems','تطبيقات وأنظمة متعددة غير مترابطة'],['Hard to manage devices from one place','صعوبة إدارة الأجهزة من مكان واحد'],['No personalization or adaptive experience','لا تخصيص ولا تجربة تتكيّف مع المستخدم'],['Weak link between security, health and entertainment','ضعف الربط بين الأمان والصحة والترفيه'],['Constant manual control','حاجة دائمة للتحكم اليدوي']],
+ vision:[['The vision','الرؤية'],['A central intelligent environment where technology works around people’s needs, so people stop adapting to technology.','بيئة ذكية مركزية تعمل فيها التقنية حول احتياجات الناس، فلا يضطرون للتكيّف معها.']],
+ sol:[['The solution','الحل'],['An adaptive smart wall ecosystem that joins automation, personalised experiences and central control in one connected interface.','منظومة جدار ذكي متكيّفة تجمع الأتمتة والتجارب المخصصة والتحكم المركزي في واجهة واحدة.']],
+ aud:[[['Individuals','الأفراد'],['Tech-savvy, busy professionals','محترفون مشغولون ملمّون بالتقنية']],[['Families','العائلات'],['Safety, comfort, connection','الأمان والراحة والتواصل']],[['Guests','الضيوف'],['Temporary access','وصول مؤقت']],[['Institutions','المؤسسات'],['Schools and offices, future expansion','مدارس ومكاتب في التوسع المستقبلي']]],
+ mods:[['Smart Home Control','التحكم في المنزل','Lighting, climate, sound, locks','إضاءة وتكييف وصوت وأقفال'],['Security & Protection','الأمان والحماية','Surveillance, alerts, emergency help','مراقبة وتنبيهات ومساعدة طارئة'],['Health & Wellness','الصحة والعافية','Monitoring, nutrition, focus, sleep','متابعة وتغذية وتركيز ونوم'],['Entertainment','الترفيه','Cinema, music, games, VR','سينما وموسيقى وألعاب وواقع افتراضي'],['Communication Hub','مركز التواصل','Calls, messages, AI assistant','مكالمات ورسائل ومساعد ذكي'],['Lifestyle & Daily','الحياة اليومية','Calendar, weather, tasks, routines','تقويم وطقس ومهام وروتين'],['Customization','التخصيص','Themes, textures, moods','سمات وخامات وأجواء'],['Vision & Family Intelligence','ذكاء الرؤية والعائلة','Child tracking, attendance, content filters','تتبع الأطفال وحضور وفلترة محتوى']],
+ arch:{top:[['Home','المنزل','Devices & routines','أجهزة وروتين'],['Lifestyle','نمط الحياة','Calendar & daily flow','تقويم ويوم منظّم'],['Entertainment','الترفيه','Cinema, music & games','سينما وموسيقى وألعاب']],bot:[['Communication','التواصل','Calls & messages','مكالمات ورسائل'],['Health','الصحة','Wellness & monitoring','عافية ومتابعة'],['Security','الأمان','Safety & access','سلامة ودخول']]},
+ modes:[['Manual Mode','الوضع اليدوي','“I’m in control”','“أنا المتحكم”','You manage almost everything. Veyra only helps when asked.','تدير كل شيء تقريبًا بنفسك، وVeyra يساعد عند الطلب فقط.',90],['Smart Assist','المساعد الذكي','“We decide together”','“نقرر معًا”','Veyra suggests and adjusts, and you always have a say.','يقترح Veyra ويضبط، ويبقى لك القرار دائمًا.',50],['Full Automation','الأتمتة الكاملة','“Let AI handle it”','“اتركها للذكاء الاصطناعي”','Veyra runs the home and only checks in for special cases.','يدير Veyra المنزل ويستشيرك في الحالات الخاصة فقط.',10]],
+ jr:[['Discover Veyra','اكتشف Veyra','v_h003','A calm splash and short onboarding cards show what the wall can see, secure and automate.','شاشة افتتاحية هادئة وبطاقات تعريف قصيرة تشرح ما يراه الجدار ويحميه ويؤتمته.'],['Create account','أنشئ حسابًا','v_h008','Register as an individual, or as a family with a host and members.','سجّل كفرد أو كعائلة بمضيف وأعضاء.'],['Personalize profile','خصّص ملفك','v_h015','A health profile and emergency contacts let the wall protect the household.','ملف صحي وجهات اتصال طارئة تتيح للجدار حماية الأسرة.'],['Set up your space','جهّز مساحتك','v_h018','Upload a floor plan or draw one, so devices live in the right rooms.','ارفع مخطط المنزل أو ارسمه لتوضع الأجهزة في الغرف الصحيحة.'],['Choose control mode','اختر وضع التحكم','v_h019','Pick how much the wall decides: manual, smart assist or full automation.','اختر مقدار ما يقرره الجدار: يدوي أو مساعد ذكي أو أتمتة كاملة.'],['Enter the experience','ادخل التجربة','v_h026','The dashboard comes alive: emotion, focus, care and safety respond to the household.','تنبض اللوحة بالحياة: المشاعر والتركيز والرعاية والأمان تستجيب للأسرة.'],['Adapt & automate','تكيّف وأتمت','v_h153','Adaptive routines learn the household and suggest what the wall does next.','روتين متكيّف يتعلم من الأسرة ويقترح خطوة الجدار التالية.']],
+ diff:[['Unified Ecosystem','منظومة موحدة'],['Adaptive Intelligence','ذكاء متكيّف'],['Multiple Control Modes','أوضاع تحكم متعددة'],['Interactive Wall','جدار تفاعلي'],['Multi-dimensional Experience','تجربة متعددة الأبعاد']],
+ feat:[
+  {k:['Entertainment','الترفيه'],t:['Cinema, music and games from one hologram zone','سينما وموسيقى وألعاب من منطقة هولوغرام واحدة'],d:['Choose a mode, let content appear in the room, then tune sound and ambient light.','اختر وضعًا ليظهر المحتوى في الغرفة ثم اضبط الصوت والإضاءة المحيطة.'],s:[['Choose a mode','اختر وضعًا'],['Hologram display zone','منطقة عرض هولوغرام'],['Control panel','لوحة التحكم'],['Cinema transition','انتقال السينما']],i:['v_h092','v_h093','v_h094','v_h096']},
+  {k:['Hologram','الهولوغرام'],t:['People and assistants projected into the room','أشخاص ومساعدون يُعرضون داخل الغرفة'],d:['A spatial hub for communication, lifestyle and wellness, with an AI avatar present everywhere.','مركز مكاني للتواصل ونمط الحياة والعافية مع أفاتار ذكي حاضر في كل مكان.'],s:[['Hologram menu','قائمة الهولوغرام'],['AI assistant','المساعد الذكي'],['Spatial 3D calls','مكالمات ثلاثية الأبعاد'],['Adaptive routines','روتين متكيّف']],i:['v_h100','v_h102','v_h105','v_h107']},
+  {k:['Themes','السمات'],t:['A wall that can disappear, reflect or react to mood','جدار يمكنه الاختفاء أو العكس أو التفاعل مع المزاج'],d:['Solid, mirror, invisible, pass-through, adaptive and mood reactive. Each is previewed before it is applied.','صلب ومرآة وشفاف وعابر ومتكيّف ومتفاعل مع المزاج، ويُعاين كل منها قبل التطبيق.'],s:[['Pick a theme','اختر سمة'],['Live preview','معاينة حية'],['Fine-tune','ضبط دقيق'],['Apply or reset','طبّق أو أعد الضبط']],i:['v_h076','v_h082','v_h086','v_h087','v_h088','v_h089']},
+  {k:['Safety','الأمان'],t:['Protection that stays calm','حماية تبقى هادئة'],d:['Hazard alerts, intruder detection, facial access and a child-safe mode for the whole household.','تنبيهات المخاطر وكشف المتسللين والدخول بالوجه ووضع آمن للأطفال لكل الأسرة.'],s:[['Sensors in every room','حساسات في كل غرفة'],['Alerts on wall and phone','تنبيهات على الجدار والهاتف'],['Take action','اتخاذ إجراء'],['Facial access','دخول بالوجه']],i:['v_h047','v_h049','v_h036','v_h037','v_h054']},
+  {k:['Lighting','الإضاءة'],t:['Every light becomes a layer of the wall','كل إضاءة تصبح طبقة في الجدار'],d:['Entrance, living room, kitchen, bathroom and bedrooms, each with a live preview and its own controls.','المدخل والصالة والمطبخ والحمام وغرف النوم، لكل منها معاينة حية وتحكم خاص.'],s:[['Pick a room','اختر غرفة'],['Pick a fixture','اختر وحدة إضاءة'],['Fine-tune','ضبط دقيق'],['Presets & suggestions','إعدادات جاهزة واقتراحات']],i:['v_h118','v_h124','v_h129','v_h137','v_h141','v_h150']},
+  {k:['Sound','الصوت'],t:['Sound and atmosphere, room by room','صوت وأجواء، غرفة بغرفة'],d:['Harmony and sleeping modes, temperature, weather-aware ambience and tuned sound profiles.','وضعا الانسجام والنوم والحرارة وأجواء تتبع الطقس وملفات صوت مضبوطة.'],s:[['Sound bubbles','فقاعات صوتية'],['Light and sound sync','مزامنة الضوء والصوت'],['Emotion detection','كشف المشاعر'],['Sound therapy','علاج صوتي']],i:['v_h157','v_h160','v_h161','v_h163','v_h171']},
+  {k:['Lifestyle','نمط الحياة'],t:['A 3D calendar, weather, tasks and nutrition','تقويم ثلاثي الأبعاد وطقس ومهام وتغذية'],d:['Daily information in one place, with routines that adapt to you or run on a schedule.','معلومات اليوم في مكان واحد مع روتين يتكيّف معك أو يعمل بجدول.'],s:[['3D calendar','تقويم 3D'],['Weather & tasks','طقس ومهام'],['Nutrition tracker','متابعة التغذية'],['Routines','الروتين']],i:['v_h112','v_h113','v_h114','v_h115','v_h153']},
+  {k:['Kids','الأطفال'],t:['A playful space for children','مساحة مرحة للأطفال'],d:['Stories, games, drawing and learning, plus a gallery of family moments the wall captures on its own.','قصص وألعاب ورسم وتعلّم مع معرض للحظات العائلية يلتقطها الجدار تلقائيًا.'],s:[['Meet the guide','تعرّف على المرشد'],['Play & learn','العب وتعلّم'],['Capture moments','التقاط اللحظات'],['Share','المشاركة']],i:['v_h058','v_h066','v_h069']}
+ ]
+};
+/* Service */
+const S={
+ eco:[['Workspace members','أعضاء المساحة','Rami · Omar · Ahmed Sami · Mariam · Nour','رامي · عمر · أحمد سامي · مريم · نور'],['Front of house','الاستقبال','Salma · Reception','سلمى · الاستقبال'],['Community','المجتمع','Leila · Events & feedback','ليلى · الفعاليات والملاحظات'],['Operations','التشغيل','Ziad · IT support · Ahmed Saad · Cleaning','زياد · الدعم التقني · أحمد سعد · النظافة']],
+ themes:[['Quiet & privacy','الهدوء والخصوصية','Sound-insulated desks, private study zones and flexible quiet hours support deep work and calls.','مكاتب معزولة صوتيًا ومناطق دراسة خاصة وساعات هدوء مرنة تدعم العمل العميق والمكالمات.'],['Connectivity & support','الاتصال والدعم','Reliable Wi-Fi, power access, printing support and a clear way to report technical issues.','واي فاي موثوق وإتاحة كهرباء ودعم طباعة وطريقة واضحة للإبلاغ عن المشكلات التقنية.'],['Wayfinding & availability','الإرشاد والتوفر','Clear guidance, visible service points and real-time information reduce uncertainty.','إرشاد واضح ونقاط خدمة ظاهرة ومعلومات لحظية تقلل الغموض.'],['Comfort & reset','الراحة وإعادة الشحن','Ventilation, natural light, ergonomic seating and refreshments shape longer sessions.','التهوية والإضاءة الطبيعية والمقاعد المريحة والمشروبات تحدد جودة الجلسات الطويلة.']],
+ tens:[['Focus vs. activity','التركيز مقابل النشاط','Freelancers and students need quiet, while shared zones support conversation.','المستقلون والطلاب يحتاجون الهدوء بينما تدعم المناطق المشتركة الحوار.'],['Information vs. uncertainty','المعلومة مقابل الغموض','Visitors need clear guidance on spaces and availability, and staff need coordinated information.','يحتاج الزوار إرشادًا واضحًا عن المساحات والتوفر ويحتاج الموظفون معلومات منسقة.'],['Comfort vs. long use','الراحة مقابل الاستخدام الطويل','Air, seating, power, refreshments and Wi-Fi decide how long people can stay.','الهواء والمقاعد والكهرباء والمشروبات والواي فاي تحدد مدة بقاء الناس.']],
+ pers:[
+  {k:'salma',n:['Salma Hany','سلمى هاني'],r:['Receptionist, 29','موظفة استقبال، 29'],cv:'s_cv10',g:['Make visitors comfortable and present a professional image of the space.','أن يشعر الزوار بالراحة وتظهر المساحة بصورة احترافية.'],p:['Many communication channels, no real-time feedback.','قنوات تواصل كثيرة بلا ملاحظات لحظية.'],d:['A clear system for bookings and complaints.','نظام واضح للحجوزات والشكاوى.']},
+  {k:'omar',n:['Omar Hassan','عمر حسن'],r:['Freelance web developer, 26','مطوّر ويب مستقل، 26'],cv:'s_cv22',g:['A quiet space and fast internet for focused coding.','مكان هادئ وإنترنت سريع لبرمجة مركّزة.'],p:['Booking, availability and check-in issues.','مشكلات في الحجز والتوفر وتسجيل الدخول.'],d:['Reliable booking, stable internet, quiet zones for calls.','حجز موثوق وإنترنت مستقر ومناطق هادئة للمكالمات.']},
+  {k:'rami',n:['Rami Mohamed','رامي محمد'],r:['Freelance developer, 22','مطوّر مستقل، 22'],cv:'s_cv26',g:['Stay productive in a quiet, focused space.','البقاء منتجًا في مكان هادئ ومركّز.'],p:['Inconsistent Wi-Fi and few outlets near desks.','واي فاي غير مستقر ومآخذ قليلة قرب المكاتب.'],d:['Stable internet, large desks, accessible outlets.','إنترنت مستقر ومكاتب كبيرة ومآخذ سهلة الوصول.']},
+  {k:'mariam',n:['Mariam Elsayed','مريم السيد'],r:['Mass Communication student, 21','طالبة إعلام، 21'],cv:'s_cv34',g:['A quiet place for exams and group projects.','مكان هادئ للامتحانات والمشاريع الجماعية.'],p:['Cafés are noisy and lack resources.','المقاهي صاخبة وتفتقر للموارد.'],d:['Separate quiet and collaboration zones, student rates.','مناطق هدوء وتعاون منفصلة وأسعار للطلاب.']},
+  {k:'ziad',n:['Ziad Adel','زياد عادل'],r:['IT support technician, 32','فني دعم تقني، 32'],cv:'s_cv38',g:['Keep Wi-Fi, printers and AV stable and secure.','إبقاء الواي فاي والطابعات والصوت والصورة مستقرة وآمنة.'],p:['Simultaneous requests and outdated hardware.','طلبات متزامنة وأجهزة قديمة.'],d:['Diagnostic tools, clear escalation, a knowledge base.','أدوات تشخيص ومسار تصعيد واضح وقاعدة معرفة.']},
+  {k:'ahmed',n:['Ahmed Saad','أحمد سعد'],r:['Cleaning staff, 42','عامل نظافة، 42'],cv:'s_cv42',g:['A clean, organised space, and rounds without obstacles.','مساحة نظيفة ومنظمة وجولات بلا عوائق.'],p:['Hard-to-reach areas and inadequate storage.','مناطق يصعب الوصول لها وتخزين غير كافٍ.'],d:['A small dedicated storage room and clear supervisor contact.','غرفة تخزين صغيرة مخصصة وتواصل واضح مع المشرفين.']}],
+ ws:[
+  [['What change would you wish to see?','ما التغيير الذي تتمنى رؤيته؟'],[['Improve Wi-Fi strength and coverage','تحسين قوة الواي فاي وتغطيته'],['Add quiet and private work and study zones','إضافة مناطق عمل ودراسة هادئة وخاصة'],['Use digital tools for navigation and support','استخدام أدوات رقمية للإرشاد والدعم'],['Show real-time space availability','عرض توفر المساحات لحظيًا'],['Place coffee and water closer to work areas','وضع القهوة والمياه أقرب لأماكن العمل']]],
+  [['What is your favorite spot?','ما مكانك المفضل؟'],[['People are drawn to focused, functional zones: meeting rooms, booths and desks','يميل الناس للمناطق المركزة والعملية: غرف الاجتماعات والكبائن والمكاتب'],['Social zones like the lounge and coffee corner are highly valued','المناطق الاجتماعية مثل الصالة وركن القهوة لها قيمة كبيرة'],['Priority: comfort in focused zones, efficiency at reception','الأولوية: الراحة في مناطق التركيز والكفاءة في الاستقبال']]],
+  [['What tech issue do you face most?','ما أكثر مشكلة تقنية تواجهك؟'],[['Wi-Fi stability and speed is the top concern for remote and freelance users','ثبات الواي فاي وسرعته أهم هاجس للمستقلين والعاملين عن بعد'],['Print and projection issues hurt productivity','مشكلات الطباعة والعرض تقلل الإنتاجية'],['Users need faster tech support and clearer device instructions','يحتاج المستخدمون دعمًا أسرع وتعليمات أوضح للأجهزة'],['Power access and connectivity points are a priority','الكهرباء ونقاط الاتصال أولوية']]],
+  [['How private do you feel?','ما مدى شعورك بالخصوصية؟'],[['Many users need soundproof or semi-private areas','كثيرون يحتاجون مناطق معزولة صوتيًا أو شبه خاصة'],['Phone booths and partitioned desks could raise satisfaction','كبائن الهاتف والمكاتب المقسّمة قد ترفع الرضا'],['Front-facing staff also need partial barriers','موظفو الواجهة يحتاجون حواجز جزئية أيضًا']]],
+  [['What furniture needs improving?','ما الأثاث الذي يحتاج تحسينًا؟'],[['Ergonomic chairs and spacious desks for long and creative sessions','كراسي مريحة ومكاتب واسعة للجلسات الطويلة والإبداعية'],['Temperature control in zones like the IT room','التحكم في الحرارة في مناطق مثل غرفة الدعم التقني'],['Breakout zones need more inviting seating','مناطق الاستراحة تحتاج مقاعد أكثر جاذبية'],['Natural light and flexible layouts improve focus','الإضاءة الطبيعية والتخطيط المرن يحسّنان التركيز']]],
+  [['Is the ventilation right for you?','هل التهوية مناسبة لك؟'],[['Air quality is inconsistent across areas','جودة الهواء غير متساوية بين المناطق'],['Strong preference for seats near windows or AC','تفضيل واضح للمقاعد قرب النوافذ أو التكييف'],['Fixes: cross-ventilation, AC upkeep, natural air','الحلول: تهوية متقاطعة وصيانة التكييف وهواء طبيعي']]],
+  [['Do we need relaxation areas?','هل نحتاج مناطق استرخاء؟'],[['Reset spaces matter for both members and staff','مساحات إعادة الشحن مهمة للأعضاء والموظفين'],['Affordable snacks and drinks help long stays','وجبات خفيفة ومشروبات بأسعار مناسبة تساعد على الإقامة الطويلة'],['Lounge seating and a recreational corner support mental refreshment','مقاعد صالة وركن ترفيهي يدعمان الراحة الذهنية']]]
+ ],
+ spaces:[
+  {n:['Silent Study','غرفة الدراسة الهادئة'],i:'b_silent-study',q:5,pr:['from EGP 40 / hr (students)','من 40 ج.م / ساعة (طلاب)'],t:['Quiet individual desks for deep focus.','مكاتب فردية هادئة للتركيز العميق.']},
+  {n:['Shared Area','المساحة المشتركة'],i:'b_shared-area',q:2,pr:['from EGP 30 / hr (students)','من 30 ج.م / ساعة (طلاب)'],t:['Flexible seating for working side by side.','جلسات مرنة للعمل جنبًا إلى جنب.']},
+  {n:['Podcast & Audio Studio','استوديو البودكاست والصوت'],i:'b_podcast-studio',q:4,pr:['EGP 250 / hr','250 ج.م / ساعة'],t:['A closed room for recording and private calls.','غرفة مغلقة للتسجيل والمكالمات الخاصة.']},
+  {n:['Relaxation Room','غرفة الاسترخاء'],i:'b_relaxation',q:3,pr:['Free for members · walk-in','مجانية للأعضاء · دخول مباشر'],t:['A place to pause and reset. Just walk in.','مكان للراحة وإعادة الشحن. ادخل مباشرة.']}
+ ]
+};
+/* Table */
+const TB={
+ feats:[['Height adapts to the person and activity','الارتفاع يتغير حسب الشخص والنشاط','Table presets','أوضاع الطاولة','t_04'],['Size changes with the number of people','المقاس يتغير حسب عدد الأشخاص','Size control','التحكم في المقاس','t_05'],['Light adapts to the light outside','الإضاءة تتغير حسب الإضاءة الخارجية','Smart light','إضاءة ذكية','t_06'],['Scans the phone battery and charges it','تفحص بطارية الهاتف وتشحنه','Wireless charger','الشاحن اللاسلكي','t_07'],['Measures and controls temperature','تقيس الحرارة وتتحكم فيها','AC & cooling','التكييف والتبريد','t_08'],['Organizes appointments and reminds','ترتّب المواعيد وتذكّر بها','Alarm & tasks','المنبه والمهام','t_09']],
+ where:[['Home','المنزل'],['Offices','المكاتب'],['Companies','الشركات'],['Clubs','النوادي'],['School & university','المدارس والجامعات']],
+ who:[['Child','طفل'],['Young man','شاب'],['Girl','فتاة'],['Man','رجل'],['Family','عائلة'],['Older adults','كبار السن']],
+ pal:[['Chocolate','شوكولاتة','#2E140E','#F1E6D8'],['Walnut','جوز','#5A2A1A','#F1E6D8'],['Cocoa glass','زجاج الكاكاو','#7A4A3A','#F1E6D8'],['Oak','بلوط','#A9805A','#1A0C08'],['Cream','كريمي','#E3CDB0','#2E140E'],['Shadow','ظل','#1A0C08','#E3CDB0']],
+ shots:['t_11','t_10','t_14','t_15','t_17','t_18','t_19','t_20','t_21','t_22','t_23','t_24','t_12','t_13','t_02'],
+ presets:{laptop:[0,45,40,0,['Laptop','لابتوب']],drawing:[1,55,45,1,['Drawing','رسم']],eating:[2,30,100,2,['Eating','أكل']]}
+};
+const MORE=[
+ [['Graduation · High Distinction','تخرج · امتياز مرتفع'],'KHEPRA',['A smart, sustainable vehicle for heritage and archaeological sites, inspired by Egyptian culture.','مركبة ذكية ومستدامة للمواقع الأثرية والتراثية بوحي من الثقافة المصرية.']],
+ [['Graduation · High Distinction','تخرج · امتياز مرتفع'],'ELVANO',['A vertical smart bakery system that organises the baking process in a compact, user-friendly product.','نظام مخبز ذكي رأسي ينظّم عملية الخبز في منتج مدمج وسهل الاستخدام.']],
+ [['Industrial concept','مفهوم صناعي'],'Glass Recycling Facility',['Efficient processing and sustainable production that reduce the environmental impact of industrial glass waste.','معالجة فعّالة وإنتاج مستدام يقلّلان الأثر البيئي لمخلفات الزجاج الصناعية.']]
+];
+const SKILLS=[[['Software','البرامج'],['SolidWorks','AutoCAD','Blender','Figma','Adobe XD','Microsoft Office']],[['Technical','تقنية'],['Product Design','Design Research','Concept Development','Design Thinking','User-Centered Design','Ergonomics','Form Development','3D Modeling','Prototyping','Material Selection','Manufacturing','Sustainable Design']],[['Soft skills','مهارات شخصية'],['Collaboration','Problem-Solving','Critical Thinking','Creativity','Attention to Detail','Presentation','Fast Learner']]];
+
+/* ---------- RENDER ---------- */
+const arrow='<span class="ar">→</span>';
+function head(p){return `<div class="wrap">
+ <div class="ch-head" data-rv><div class="ch-num">${p.n}</div><div><div class="mono mut">${T(p.kind)}</div><h2 class="ch-title" style="margin-top:12px">${p.t}</h2><div class="chips">${p.tags.map(x=>`<span class="chip dot">${x}</span>`).join('')}</div></div></div>
+ <div class="hero-img" data-rv><img src="${A(p.img)}" alt="${p.t.replace(/<br>/g,' ')}" loading="lazy"></div>
+ <div class="meta" data-rv><div class="lede">${T(p.lede)}</div><dl style="margin:0"><dt class="mono">${LG=='ar'?'الدور':'Role'}</dt><dd>${T(p.role)}</dd></dl><dl style="margin:0"><dt class="mono">${LG=='ar'?'الفريق':'Team'}</dt><dd>${T(p.team)}</dd></dl><dl style="margin:0"><dt class="mono">${LG=='ar'?'المخرجات':'Scope'}</dt><dd>${T(p.scope)}</dd></dl></div>
+ <div class="cta" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:28px" data-rv>${p.links.map((l,i)=>l[0]==='site'?`<button class="btn" data-open="${p.id}" data-mag>${T([l[1],l[2]])}${arrow}</button>`:l[0]==='bigbang'?`<button class="btn ghost" data-open="bigbang" data-mag>${T([l[1],l[2]])}${arrow}</button>`:`<a class="btn ghost" href="${l[3]}" target="_blank" rel="noopener" data-mag>${T([l[1],l[2]])} ↗</a>`).join('')}</div>
+ <div class="stats" data-rv>${p.stats.map(s=>`<div><b data-count="${s[0]}" data-suf="${s[1]}">${s[0]}${s[1]}</b><span class="mono mut">${T(s[2])}</span></div>`).join('')}</div>`}
+const blk=(h,sub,body)=>`<div class="blk" data-rv><h3>${h}</h3>${sub?`<p class="sub">${sub}</p>`:''}${body}</div>`;
+const strip=(imgs,cls='')=>`<div class="strip ${cls}">${imgs.map(i=>`<figure><img src="${A(i[0])}" alt="${i[1]||''}" loading="lazy" draggable="false">${i[1]?`<figcaption>${i[1]}</figcaption>`:''}</figure>`).join('')}</div>`;
+
+function renderVeyra(){const p=P.veyra;
+ const jr=V.jr;
+ return `<section class="ch" id="veyra" style="--pc:${p.pc}">${head(p)}
+ ${blk(LG=='ar'?'المشكلة: المنازل الذكية <em>غير مترابطة</em>':'The problem: smart homes are <em>disconnected</em>','',`<div class="two"><ul class="list">${V.problem.map(x=>`<li>${T(x)}</li>`).join('')}</ul><div style="display:grid;gap:14px"><div class="card"><div class="mono mut">${T(V.vision[0])}</div><p style="margin-top:10px;color:var(--ink);font-size:19px">${T(V.vision[1])}</p></div><div class="card"><div class="mono mut">${T(V.sol[0])}</div><p style="margin-top:10px;color:var(--ink);font-size:19px">${T(V.sol[1])}</p></div></div></div>`)}
+ ${blk(LG=='ar'?'لمن صُمّم <em>Veyra</em>':'Who Veyra is <em>for</em>','',`<div class="grid4">${V.aud.map(a=>`<div class="card"><h4>${T(a[0])}</h4><p>${T(a[1])}</p></div>`).join('')}</div>`)}
+ ${blk(LG=='ar'?'ثماني وحدات <em>أساسية</em>':'Eight core <em>modules</em>','',`<div class="grid4">${V.mods.map(m=>`<div class="mod"><b>${T([m[0],m[1]])}</b><span class="mut" style="font-size:14px">${T([m[2],m[3]])}</span></div>`).join('')}</div>`)}
+ ${blk(LG=='ar'?'لوحة واحدة، <em>ستة عوالم</em>':'One dashboard, <em>six worlds</em>',LG=='ar'?'هيكل التنقل: ثلاثة عوالم في الأعلى وثلاثة في الأسفل حول اللوحة الرئيسية.':'Navigation architecture: three worlds above and three below the main dashboard.',`<div class="arch-d"><div class="r">${V.arch.top.map(n=>`<div class="n"><b>${T([n[0],n[1]])}</b><span class="mut">${T([n[2],n[3]])}</span></div>`).join('')}</div><div class="c">${LG=='ar'?'اللوحة الرئيسية':'Main Dashboard'}</div><div class="r">${V.arch.bot.map(n=>`<div class="n"><b>${T([n[0],n[1]])}</b><span class="mut">${T([n[2],n[3]])}</span></div>`).join('')}</div><div class="bar mono">${LG=='ar'?'المساعد الذكي · وصول شامل':'AI Assistant · Global Access'}</div></div>`)}
+ ${blk(LG=='ar'?'ثلاثة مستويات <em>للتحكم</em>':'Three levels <em>of control</em>',LG=='ar'?'اختر مقدار ما يقرره الجدار بنفسه، وغيّر رأيك في أي وقت.':'Pick how much the wall decides on its own. You can change your mind at any time.',`<div class="ctl">${V.modes.map(m=>`<div class="it"><div><h4>${T([m[0],m[1]])}</h4><q>${T([m[2],m[3]])}</q></div><div class="meter"><p class="mut" style="margin-bottom:6px">${T([m[4],m[5]])}</p><div class="l"><span>${LG=='ar'?'أنت':'You'} ${m[6]}%</span><span>Veyra ${100-m[6]}%</span></div><div class="t u"><i style="--v:${m[6]/100}"></i></div><div class="t a"><i style="--v:${(100-m[6])/100}"></i></div></div></div>`).join('')}</div>`)}
+ ${blk(LG=='ar'?'رحلة المستخدم <em>من البداية للنهاية</em>':'The end-to-end <em>journey</em>','',`<div class="jr"><div class="st" id="vjr">${jr.map((s,i)=>`<button aria-pressed="${i==0}" data-i="${i}"><span class="no">${String(i+1).padStart(2,'0')}</span><span><b>${T([s[0],s[1]])}</b><p>${T([s[3],s[4]])}</p></span></button>`).join('')}</div><div class="ph"><div class="phone"><img id="vjimg" src="${A(jr[0][2])}" alt=""></div></div></div>`)}
+ ${blk(LG=='ar'?'المزايا <em>شاشة بشاشة</em>':'Features, <em>screen by screen</em>',LG=='ar'?'لكل ميزة خطوات وشاشات مبنية لها. اسحب الشريط جانبيًا.':'Every feature has its own steps and screens. Drag the strip sideways.',`<div class="tabs" role="tablist" id="vtabs">${V.feat.map((f,i)=>`<button class="tab" role="tab" aria-selected="${i==0}" data-i="${i}">${T(f.k)}</button>`).join('')}</div><div id="vpane"></div>`)}
+ ${blk(LG=='ar'?'خمسة أسباب <em>للتميّز</em>':'Five reasons it <em>stands apart</em>','',`<div class="g5" id="diff">${V.diff.map((d,i)=>`<div class="card"><div class="mono" style="color:var(--pc)">${String(i+1).padStart(2,'0')}</div><h4 style="margin-top:14px;font-size:24px">${T(d)}</h4></div>`).join('')}</div>`)}
+ </div></section>`}
+function vPane(i){const f=V.feat[i];$('#vpane').innerHTML=`<div class="pane-d"><div><h4>${T(f.t)}</h4><p class="mut">${T(f.d)}</p><ol>${f.s.map(s=>`<li><b>${T(s)}</b></li>`).join('')}</ol></div><div>${strip(f.i.map(x=>[x,'']))}</div></div>`;bindStrips()}
+
+function renderService(){const p=P.service;
+ return `<section class="ch" id="service" style="--pc:${p.pc}">${head(p)}
+ ${blk(LG=='ar'?'قبل وبعد: <em>المخطط</em> الجديد':'Before and after: the new <em>floor plan</em>',LG=='ar'?'حرّك المقبض لمقارنة المساحة الأصلية بالمخطط المعاد تصميمه.':'Drag the handle to compare the original space with the redesigned plan.',`<div class="cmp" id="cmp"><img src="${A('s_before')}" alt="Before"><img class="top" src="${A('s_after')}" alt="After"><div class="hd"></div><span class="tg l">${LG=='ar'?'قبل':'BEFORE'}</span><span class="tg r">${LG=='ar'?'بعد':'AFTER'}</span><input type="range" min="0" max="100" value="50" id="cmpr" aria-label="Compare"></div>`)}
+ ${blk(LG=='ar'?'من يعيش داخل <em>المساحة</em>':'Who lives inside <em>the space</em>',LG=='ar'?'أربع مجموعات من أصحاب المصلحة تشكّل منظومة الخدمة.':'Four stakeholder groups make up the service ecosystem.',`<div class="grid4">${S.eco.map(e=>`<div class="card"><h4 style="font-size:26px">${T([e[0],e[1]])}</h4><p>${T([e[2],e[3]])}</p></div>`).join('')}</div>`)}
+ ${blk(LG=='ar'?'ست <em>شخصيات</em>':'Six <em>personas</em>',LG=='ar'?'اضغط على شخصية لترى هدفها ومشكلتها وما تحتاجه، ثم افتح بطاقة الشخصية كاملة.':'Select a persona for the goal, pain and need, then see the full persona sheet.',`<div class="pers"><div class="who" id="pwho">${S.pers.map((x,i)=>`<button aria-pressed="${i==0}" data-i="${i}"><img src="${A('p_'+x.k)}" alt="" loading="lazy"><span><b>${T(x.n)}</b><span>${T(x.r)}</span></span></button>`).join('')}</div><div class="det" id="pdet"></div></div>`)}
+ ${blk(LG=='ar'?'سبع ورش، <em>ما الذي قالته؟</em>':'Seven workshop prompts, <em>what people said</em>',LG=='ar'?'خرجنا من كل سؤال بخلاصات تحوّلت إلى قرارات تصميم.':'Each question produced insights that turned into design decisions.',`<div class="acc">${S.ws.map((w,i)=>`<details ${i==0?'open':''}><summary>${T(w[0])}</summary><ul>${w[1].map(x=>`<li>${T(x)}</li>`).join('')}</ul></details>`).join('')}</div>`)}
+ ${blk(LG=='ar'?'أربعة <em>محاور</em> وثلاثة توترات':'Four <em>themes</em>, three tensions','',`<div class="two"><div style="display:grid;gap:14px">${S.themes.map(x=>`<div class="card"><div class="mono" style="color:var(--pc)">${LG=='ar'?'محور':'Theme'}</div><h4 style="margin-top:8px">${T([x[0],x[1]])}</h4><p>${T([x[2],x[3]])}</p></div>`).join('')}</div><div style="display:grid;gap:14px;align-content:start">${S.tens.map(x=>`<div class="card" style="background:var(--ink);color:var(--bg)"><div class="mono" style="color:var(--butter)">${LG=='ar'?'توتر':'Tension'}</div><h4 style="margin-top:8px">${T([x[0],x[1]])}</h4><p style="color:inherit;opacity:.8">${T([x[2],x[3]])}</p></div>`).join('')}</div></div>`)}
+ ${blk(LG=='ar'?'خرائط <em>الرحلة</em>':'Journey <em>maps</em>',LG=='ar'?'خريطة سلمى الكاملة، ثم رحلتا عمر وسلمى على مخطط المساحة.':'Salma’s full map, then Omar’s and Salma’s routes across the floor plan.',strip([['s_j_map',LG=='ar'?'خريطة رحلة سلمى':'Salma journey map'],['s_j_omar',LG=='ar'?'مسار عمر':'Omar’s route'],['s_j_salma',LG=='ar'?'مسار سلمى':'Salma’s route']],'wide'))}
+ ${blk(LG=='ar'?'Big Bang: <em>موقع الحجز</em>':'Big Bang: <em>the booking site</em>',LG=='ar'?'أربع مساحات، وتوفر لحظي بالساعة من 9 إلى 5، وأسعار للطلاب، وخمس حاجات يختار منها المستخدم، بالعربية والإنجليزية.':'Four spaces, live availability by the hour from 09:00 to 17:00, student rates and five needs the visitor can start from, in English and Arabic.',`<div class="sp">${S.spaces.map(s=>`<div class="c"><img src="${A(s.i)}" alt="" loading="lazy"><div><b>${T(s.n)}</b><span class="mut" style="font-size:15px">${T(s.t)}</span><div class="mono mut" style="display:flex;gap:10px;align-items:center">${LG=='ar'?'الهدوء':'Quiet'} <span class="dots">${[1,2,3,4,5].map(n=>`<i class="${n<=s.q?'on':''}"></i>`).join('')}</span></div><div class="pr">${T(s.pr)}</div></div></div>`).join('')}</div><div style="margin-top:22px"><button class="btn" data-open="bigbang" data-mag>${LG=='ar'?'جرّب نموذج Big Bang':'Try the Big Bang prototype'}${arrow}</button></div>`)}
+ </div></section>`}
+function pDet(i){const x=S.pers[i];$('#pdet').innerHTML=`<div class="tri"><div><span class="mono">${LG=='ar'?'الهدف':'Goal'}</span>${T(x.g)}</div><div><span class="mono">${LG=='ar'?'المشكلة':'Pain'}</span>${T(x.p)}</div><div><span class="mono">${LG=='ar'?'الحاجة':'Need'}</span>${T(x.d)}</div></div><div class="sheet"><img src="${A(x.cv)}" alt="${x.n[0]} persona sheet" loading="lazy"></div>`}
+
+function renderTable(){const p=P.table;
+ return `<section class="ch" id="table" style="--pc:${p.pc}">${head(p)}
+ ${blk(LG=='ar'?'القصة أولًا، <em>ثم المزايا</em>':'Stories first, <em>features after</em>',LG=='ar'?'قبل أي شاشة رسمت قصصًا مصورة للحظات حقيقية. ستة سيناريوهات تحوّلت إلى ست مزايا.':'Before any screen I drew storyboards of real moments. Six scenarios became six features.',`<div class="stories">${TB.feats.map((f,i)=>`<figure><img src="${A(f[4])}" alt="" loading="lazy"><figcaption><span>${LG=='ar'?'سيناريو':'Scenario'} ${i+1} → ${T([f[2],f[3]])}</span><b>${T([f[0],f[1]])}</b></figcaption></figure>`).join('')}</div>`)}
+ ${blk(LG=='ar'?'ماذا قالت <em>البيانات</em>':'What the <em>data</em> said',LG=='ar'?'بدأت بخريطة ذهنية لاستخدامات الطاولة، وصنّفت أين وعلى من تُستخدم.':'It began with a mind map of how tables are used, then who uses them and where.',`<div class="two"><div class="card" style="padding:12px"><img src="${A('t_03')}" alt="Mind map" loading="lazy" style="border-radius:10px"></div><div style="display:grid;gap:14px;align-content:start"><div class="card"><div class="mono" style="color:var(--pc)">${LG=='ar'?'أين':'Where'}</div><div class="chips">${TB.where.map(x=>`<span class="chip">${T(x)}</span>`).join('')}</div></div><div class="card"><div class="mono" style="color:var(--pc)">${LG=='ar'?'من':'Who'}</div><div class="chips">${TB.who.map(x=>`<span class="chip">${T(x)}</span>`).join('')}</div></div></div></div>`)}
+ ${blk(LG=='ar'?'غيّر <em>شكل الطاولة</em>':'Reshape <em>the table</em>',LG=='ar'?'منزلقات التطبيق الثلاثة بين يديك. حرّكها أو اختر وضعًا جاهزًا.':'The app’s three sliders in your hands. Drag them or pick a preset.',`<div class="lab"><div class="stage"><span class="rd mono" id="rd"></span><svg viewBox="0 0 560 330" aria-label="Table"><ellipse cx="280" cy="296" rx="210" ry="14" fill="currentColor" opacity=".1"/><g id="tbl"><g id="legs" stroke="var(--ink)" stroke-width="10" stroke-linecap="round"></g><g id="top"><rect id="tp" x="-150" y="-9" width="300" height="18" rx="9" fill="${p.pc}"/><rect x="-150" y="-9" width="300" height="5" rx="2.5" fill="#fff" opacity=".25"/></g></g><g id="obj"></g></svg></div><div class="ctrl"><label><span class="mono">${LG=='ar'?'الزاوية':'Angle'}<b id="vA"></b></span><input type="range" id="sA" min="0" max="45" value="0"></label><label><span class="mono">${LG=='ar'?'الارتفاع':'Height'}<b id="vH"></b></span><input type="range" id="sH" min="0" max="100" value="45"></label><label><span class="mono">${LG=='ar'?'المقاس':'Size'}<b id="vS"></b></span><input type="range" id="sS" min="0" max="100" value="40"></label><div><div class="mono mut" style="margin-bottom:10px">${LG=='ar'?'أوضاع جاهزة':'Preset mode'}</div><div class="pre">${Object.entries(TB.presets).map(([k,v])=>`<button class="tab" data-pre="${k}">${T(v[4])}</button>`).join('')}</div></div></div></div>`)}
+ ${blk(LG=='ar'?'ألوان وخطوط <em>التطبيق</em>':'Colour & type <em>of the app</em>',LG=='ar'?'باليت دافئة من الشوكولاتة إلى الكريمي، مع خط شعار مائل أنيق وعناوين سيريف ناعمة وعناصر سانس خفيفة.':'A warm palette from chocolate to cream, with an elegant script wordmark, soft serif headings and light sans labels.',`<div class="sw">${TB.pal.map(c=>`<div style="background:${c[2]};color:${c[3]}"><b>${T([c[0],c[1]])}</b>${c[2]}</div>`).join('')}</div>`)}
+ ${blk(LG=='ar'?'التطبيق <em>شاشة بشاشة</em>':'The app, <em>screen by screen</em>',LG=='ar'?'من الدخول بالبصمة إلى التحكم بالإضاءة والأجهزة والمهام.':'From fingerprint sign-in to light, device and task control.',strip(TB.shots.slice(0,14).map(x=>[x,''])))}
+ </div></section>`}
+
+function renderAll(){
+ $('#idx').innerHTML=Object.values(P).map(p=>`<div class="row" data-go="${p.id}" data-prev="${p.prev}" tabindex="0" role="link"><span class="n">${p.n}</span><h3>${p.t.replace(/<br>/g,' ')}</h3><span class="k">${T(p.kind)}</span><span class="go">→</span></div>`).join('');
+ $('#chapters').innerHTML=renderVeyra()+renderService()+renderTable();
+ $('#moreList').innerHTML=MORE.map(m=>`<div class="card" data-rv><div class="mono mut">${T(m[0])}</div><div><h4 class="serif" style="margin-bottom:12px">${m[1]}</h4><p>${T(m[2])}</p></div></div>`).join('');
+ $('#aboutBody').innerHTML=`<div data-rv><div class="mono mut" style="margin-bottom:16px">${LG=='ar'?'نبذة':'About'}</div><p class="big">${LG=='ar'?'شغوفة بفهم احتياجات المستخدمين وتحويلها إلى حلول تصميم وظيفية وبديهية وذات معنى. مصمّمة مبدعة ومرنة بمهارات قوية في حل المشكلات والعمل الجماعي.':'Passionate about understanding user needs and turning them into functional, intuitive and meaningful design. A creative, adaptable designer with strong problem-solving and collaboration skills.'}</p>
+ <div class="two" style="margin-top:34px"><div class="card"><h4>${LG=='ar'?'الرؤية':'Vision'}</h4><p>${LG=='ar'?'عالم تُصمَّم فيه كل المنتجات والمساحات والخدمات حول سلوك الإنسان الحقيقي، بجمال وشمول واستدامة، ويحترم فيه التصميم الثقافة وهو يخدم المستقبل.':'A world where every product, space and service is shaped around real human behaviour, beautiful, inclusive and sustainable, where design honours culture while serving the future.'}</p></div><div class="card"><h4>${LG=='ar'?'الرسالة':'Mission'}</h4><p>${LG=='ar'?'أن أبحث بعمق وأنصت للمستخدمين وأحوّل الفهم إلى حلول بديهية، وأجمع بين التصميم الصناعي وتصميم الخدمات وتجربة المستخدم.':'To research deeply, listen to users and turn insight into intuitive solutions, bridging industrial design, service design and UI/UX.'}</p></div></div>
+ <div class="edu"><span class="mono mut">OCT 2021 — JUL 2026</span><b>${LG=='ar'?'بكالوريوس التصميم الصناعي':'Bachelor of Industrial Design'}</b><span>${LG=='ar'?'كلية الفنون التطبيقية، جامعة دمياط':'Faculty of Applied Arts, Damietta University'}</span><span class="mut">${LG=='ar'?'الثالثة على الدفعة · المعدل 3.49 / 4.00 · مشروع التخرج بتقدير امتياز مرتفع':'Ranked 3rd in the graduating class · GPA 3.49 / 4.00 · Graduation project: High Distinction'}</span></div>
+ ${SKILLS.map(g=>`<div class="grp"><h4 class="mono">${T(g[0])}</h4><div class="chips">${g[1].map(x=>`<span class="chip">${x}</span>`).join('')}</div></div>`).join('')}
+ <div class="grp"><h4 class="mono">${LG=='ar'?'اللغات':'Languages'}</h4><div class="chips"><span class="chip">${LG=='ar'?'العربية — اللغة الأم':'Arabic — Native'}</span><span class="chip">${LG=='ar'?'الإنجليزية — جيدة':'English — Good'}</span></div></div></div>`;
+ $('#clines').innerHTML=`<div class="l"><span class="mono">Email</span><a href="mailto:${EM}" style="flex:1;min-width:0">${EM}</a><button class="cp" data-copy="${EM}">${LG=='ar'?'نسخ':'COPY'}</button></div><a class="l" href="${WA}" target="_blank" rel="noopener"><span class="mono">WhatsApp</span><span>${PH.replace(/^0/,'+20 ')}</span><span>↗</span></a><a class="l" href="${LI}" target="_blank" rel="noopener"><span class="mono">LinkedIn</span><span>nesrin-mahmoud123</span><span>↗</span></a><div class="l"><span class="mono">${LG=='ar'?'الموقع':'Based in'}</span><span>${LG=='ar'?'المنصورة، مصر':'Mansoura, Egypt'}</span><span class="mono">${PH}</span></div>`;
+ const words=LG=='ar'?['تصميم صناعي','تجربة مستخدم','تصميم خدمات','تصميم منتج','بحث','نماذج أولية']:['Industrial Design','UI/UX','Service Design','Product','Research','Prototyping'];
+ const one=words.map(w=>`<span>${w} <i>✦</i></span>`).join('');$('#mq').innerHTML=one+one;
+ vPane(0);pDet(0);wire();
+}
+function applyStatic(){document.documentElement.lang=LG;document.documentElement.dir=LG=='ar'?'rtl':'ltr';
+ $$('[data-en]').forEach(e=>{e.innerHTML=e.dataset[LG]});$('#lg').textContent=LG=='ar'?'English':'العربية';
+ $('#vc').textContent=LG=='ar'?'→ الرئيسية':'← Portfolio';themeLabel()}
+
+/* ---------- INTERACTIONS ---------- */
+function bindStrips(){$$('.strip,.stories').forEach(s=>{if(s._b)return;s._b=1;let d=0,x=0,sl=0;
+ s.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')return;d=1;x=e.clientX;sl=s.scrollLeft;s.classList.add('drag')});
+ addEventListener('pointermove',e=>{if(!d)return;s.scrollLeft=sl-(e.clientX-x)});
+ addEventListener('pointerup',()=>{d=0;s.classList.remove('drag')})})}
+function wire(){
+ $$('[data-open]').forEach(b=>b.onclick=()=>openSite(b.dataset.open));
+ $$('.row').forEach(r=>{r.onclick=()=>$('#'+r.dataset.go).scrollIntoView({behavior:'smooth'});r.onkeydown=e=>{if(e.key==='Enter')r.click()};
+  r.onmouseenter=()=>{$('#pv img').src=A(r.dataset.prev);$('#pv').classList.add('on')};r.onmouseleave=()=>$('#pv').classList.remove('on')});
+ $$('[data-copy]').forEach(b=>b.onclick=e=>{e.preventDefault();e.stopPropagation();const t=b.dataset.copy;const done=()=>{const o=b.textContent;b.textContent='✓';setTimeout(()=>b.textContent=o,1400)};try{navigator.clipboard.writeText(t).then(done,done)}catch(_){done()}});
+ $$('#vtabs .tab').forEach(t=>t.onclick=()=>{$$('#vtabs .tab').forEach(x=>x.setAttribute('aria-selected',x===t));vPane(+t.dataset.i)});
+ $$('#vjr button').forEach(b=>b.onclick=()=>{$$('#vjr button').forEach(x=>x.setAttribute('aria-pressed',x===b));const im=$('#vjimg');im.style.opacity=.2;setTimeout(()=>{im.src=A(V.jr[+b.dataset.i][2]);im.style.opacity=1},160)});
+ const vi=$('#vjimg');if(vi)vi.style.transition='opacity .3s';
+ $$('#pwho button').forEach(b=>b.onclick=()=>{$$('#pwho button').forEach(x=>x.setAttribute('aria-pressed',x===b));pDet(+b.dataset.i)});
+ const r=$('#cmpr');if(r)r.oninput=()=>$('#cmp').style.setProperty('--p',r.value+'%');
+ tableLab();bindStrips();
+ $$('[data-mag]').forEach(b=>{b.onpointermove=e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.18}px,${(e.clientY-r.top-r.height/2)*.28}px)`};b.onpointerleave=()=>b.style.transform=''});
+ $$('a,button,.row').forEach(e=>{e.addEventListener('pointerenter',()=>$('#cur').classList.add('big'));e.addEventListener('pointerleave',()=>$('#cur').classList.remove('big'))});
+}
+/* table lab */
+function tableLab(){const sA=$('#sA');if(!sA)return;const sH=$('#sH'),sS=$('#sS');
+ function draw(){const a=+sA.value,h=+sH.value,s=+sS.value;
+  const topY=280-(40+h*1.5),w=190+s*1.5;
+  $('#tp').setAttribute('x',-w/2);$('#tp').setAttribute('width',w);$('#top').firstElementChild.nextElementSibling.setAttribute('x',-w/2);$('#top').firstElementChild.nextElementSibling.setAttribute('width',w);
+  $('#tbl').setAttribute('transform',`translate(280 ${topY}) rotate(${-a})`);
+  const lx=w/2-24;$('#legs').innerHTML=`<line x1="${-lx}" y1="9" x2="${-lx}" y2="${280-topY}" /><line x1="${lx}" y1="9" x2="${lx}" y2="${280-topY}"/>`;
+  $('#legs').setAttribute('transform',`rotate(${a})`);
+  $('#vA').textContent=a+'°';$('#vH').textContent=Math.round(55+h*.75)+' cm';$('#vS').textContent=Math.round(80+s*1.6)+' cm';
+  const m=h<22?(LG=='ar'?'طاولة قهوة':'Coffee table'):a>20?(LG=='ar'?'لوحة رسم':'Drawing board'):h>70?(LG=='ar'?'طاولة وقوف':'Standing desk'):s>70?(LG=='ar'?'طاولة طعام':'Dining table'):(LG=='ar'?'مكتب':'Desk');$('#rd').textContent=m;
+  $('#obj').innerHTML=`<g transform="translate(280 ${topY}) rotate(${-a}) translate(${-w/4} -9)"><rect x="-26" y="-6" width="52" height="6" rx="2" fill="var(--ink)"/><path d="M-22 -6 L-30 -40 L30 -40 L22 -6Z" fill="var(--ink)" opacity=".85" transform="rotate(-12 0 -6)"/></g>`}
+ [sA,sH,sS].forEach(i=>i.oninput=draw);
+ $$('[data-pre]').forEach(b=>b.onclick=()=>{const v=TB.presets[b.dataset.pre];const m={laptop:[0,40,40],drawing:[32,55,45],eating:[0,30,100]}[b.dataset.pre];sA.value=m[0];sH.value=m[1];sS.value=m[2];draw()});draw()}
+
+/* viewer */
+function openSite(k,push=true){const f=$('#vf'),ld=$('#ld');$('#vt').textContent=SITE_TITLES[k];ld.style.opacity=1;ld.textContent=LG=='ar'?'جارٍ التحميل…':'Loading…';f.onload=()=>ld.style.opacity=0;
+ f.src='projects/'+k+'.html';$('#vo').href='projects/'+k+'.html';$('#vo').textContent=LG=='ar'?'فتح في تبويب ↗':'New tab ↗';$('#vw').classList.add('on');document.body.style.overflow='hidden';if(push&&location.hash!=='#site-'+k)location.hash='site-'+k}
+function closeSite(){$('#vw').classList.remove('on');$('#vf').removeAttribute('src');document.body.style.overflow='';if(location.hash.startsWith('#site-'))history.replaceState(null,'',location.pathname+location.search+'#work')}
+$('#vc').onclick=closeSite;addEventListener('keydown',e=>{if(e.key==='Escape')closeSite()});
+addEventListener('hashchange',()=>{const h=location.hash;if(h.startsWith('#site-')&&SITE_TITLES[h.slice(6)])openSite(h.slice(6),false);else if($('#vw').classList.contains('on'))closeSite()});
+
+/* theme + language */
+function effTheme(){const d=document.documentElement.dataset.theme;if(d)return d;return matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}
+function themeLabel(){$('#thl').textContent=effTheme()==='dark'?(LG=='ar'?'فاتح':'Light'):(LG=='ar'?'داكن':'Dark')}
+$('#th').onclick=e=>{const n=effTheme()==='dark'?'light':'dark';const go=()=>{document.documentElement.dataset.theme=n;themeLabel();try{localStorage.setItem('nm-t',n)}catch(_){}};
+ if(document.startViewTransition&&!matchMedia('(prefers-reduced-motion:reduce)').matches){const x=e.clientX,y=e.clientY,r=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));const t=document.startViewTransition(go);t.ready.then(()=>document.documentElement.animate({clipPath:[`circle(0 at ${x}px ${y}px)`,`circle(${r}px at ${x}px ${y}px)`]},{duration:700,easing:'cubic-bezier(.2,.8,.2,1)',pseudoElement:'::view-transition-new(root)'})).catch(()=>{})}else go()};
+$('#lg').onclick=()=>{LG=LG==='en'?'ar':'en';try{localStorage.setItem('nm-l',LG)}catch(_){}applyStatic();renderAll();animate(false)};
+
+/* animation */
+let triggers=[];
+function animate(first){
+ if(!window.gsap||!window.ScrollTrigger||matchMedia('(prefers-reduced-motion:reduce)').matches){return}
+ gsap.registerPlugin(ScrollTrigger);ScrollTrigger.getAll().forEach(t=>t.kill());
+ $$('[data-rv]').forEach(el=>{gsap.fromTo(el,{y:44,opacity:0},{y:0,opacity:1,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 92%',once:true}})});
+ $$('.hero-img img,#parch img').forEach(im=>{gsap.fromTo(im,{yPercent:-6},{yPercent:6,ease:'none',scrollTrigger:{trigger:im.parentElement,start:'top bottom',end:'bottom top',scrub:true}})});
+ $$('[data-count]').forEach(el=>{const to=+el.dataset.count,suf=el.dataset.suf||'';const o={v:0};ScrollTrigger.create({trigger:el,start:'top 92%',once:true,onEnter:()=>gsap.to(o,{v:to,duration:1.6,ease:'power2.out',onUpdate:()=>el.textContent=Math.round(o.v)+suf})})});
+ $$('.meter .t i').forEach(i=>{const v=i.style.getPropertyValue('--v');i.style.setProperty('--v',0);ScrollTrigger.create({trigger:i,start:'top 92%',once:true,onEnter:()=>i.style.setProperty('--v',v)})});
+ gsap.to('#mq',{xPercent:-3,ease:'none',scrollTrigger:{trigger:'.mq',start:'top bottom',end:'bottom top',scrub:true}});
+ gsap.to('.badge',{rotate:18,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+ ScrollTrigger.refresh()}
+addEventListener('scroll',()=>{const h=document.documentElement;$('#prog').style.transform=`scaleX(${scrollY/Math.max(1,h.scrollHeight-innerHeight)})`;$('#nav').classList.toggle('solid',scrollY>40)},{passive:true});
+addEventListener('pointermove',e=>{const c=$('#cur');c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';const p=$('#pv');p.style.left=e.clientX+'px';p.style.top=e.clientY+'px'});
+
+/* boot */
+try{const t=localStorage.getItem('nm-t');if(t)document.documentElement.dataset.theme=t;const l=localStorage.getItem('nm-l');if(l==='ar')LG='ar'}catch(_){}
+applyStatic();renderAll();
+(function(){let n=0;const el=$('#pn');const iv=setInterval(()=>{n=Math.min(100,n+Math.ceil(Math.random()*14));el.textContent=String(n).padStart(2,'0');if(n>=100){clearInterval(iv);done()}},60);
+ let fin=false;function done(){if(fin)return;fin=true;$('#pre').classList.add('out');document.body.classList.add('ready');setTimeout(()=>{$('#pre').style.display='none';animate(true);const h=location.hash;if(h.startsWith('#site-')&&SITE_TITLES[h.slice(6)])openSite(h.slice(6),false)},900)}
+ setTimeout(done,2600)})();
+</script>
+
+</body></html>
